@@ -666,16 +666,25 @@ footer p {
     }
 
     #home {
-        min-height: 100svh;
+        min-height: auto;
 
-        padding-top: 110px;
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+
+        padding-top: 130px;
     }
 
     #home h1 {
         font-size: clamp(2.5rem, 8vw, 4rem);
     }
-}
 
+    .home-projects {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
 
 /* =========================================================
    모바일
@@ -689,7 +698,6 @@ footer p {
 
     nav {
         flex-wrap: wrap;
-
         gap: 10px 18px;
     }
 
@@ -705,8 +713,12 @@ footer p {
         font-size: clamp(2.2rem, 11vw, 3.2rem);
     }
 
-    #home > p:nth-of-type(2) {
+    #home .home-content > p:nth-of-type(2) {
         font-size: 1rem;
+    }
+
+    .home-projects {
+        grid-template-columns: 1fr;
     }
 
     #projects > article {
@@ -725,8 +737,8 @@ footer p {
     footer {
         padding: 30px 20px;
     }
-}
 
+}
 
 /* =========================================================
    움직임 줄이기
