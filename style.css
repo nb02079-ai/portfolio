@@ -173,12 +173,157 @@ button:focus-visible {
 #home {
     min-height: 100vh;
 
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+
+    align-items: center;
+
+    gap: 70px;
+
+    padding-top: 100px;
+    padding-bottom: 60px;
+}
+
+
+/* 왼쪽 소개 영역 */
+
+.home-content {
+    min-width: 0;
+}
+
+#home .home-content > p:first-child {
+    margin-bottom: 20px;
+
+    color: #2563eb;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+#home h1 {
+    max-width: 850px;
+
+    font-size: clamp(2.7rem, 5vw, 5rem);
+    font-weight: 800;
+
+    letter-spacing: -0.04em;
+
+    margin-bottom: 28px;
+}
+
+#home h1::after {
+    content: "";
+
+    display: block;
+
+    width: 70px;
+    height: 4px;
+
+    margin-top: 25px;
+
+    background-color: #2563eb;
+}
+
+#home .home-content > p:nth-of-type(2) {
+    max-width: 600px;
+
+    font-size: 1.05rem;
+
+    margin-bottom: 30px;
+}
+
+
+/* 프로젝트 버튼 */
+
+#home .home-content > a {
+    width: fit-content;
+
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
 
-    padding-top: 120px;
-    padding-bottom: 60px;
+    padding: 12px 22px;
+
+    color: #ffffff;
+    background-color: #111827;
+
+    border-radius: 8px;
+
+    font-weight: 700;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+#home .home-content > a:hover {
+    background-color: #2563eb;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   Home Project Preview
+========================================================= */
+
+.home-projects {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+
+    min-width: 0;
+}
+
+.home-project-card {
+    position: relative;
+
+    padding: 22px 24px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.home-project-card:hover {
+    transform: translateX(5px);
+
+    border-color: #2563eb;
+}
+
+.home-project-card span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #2563eb;
+
+    font-size: 0.75rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+}
+
+.home-project-card h2 {
+    margin-bottom: 5px;
+
+    font-size: 1.15rem;
+}
+
+.home-project-card p {
+    font-size: 0.9rem;
 }
 
 #home > p:first-child {
