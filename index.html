@@ -1,316 +1,340 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>도형 | Mechanical Engineering Portfolio</title>
-
-    <meta name="description" content="기계공학 전공자로서 시뮬레이션, 설계 및 데이터 분석 프로젝트를 소개하는 포트폴리오입니다.">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>도형 | Mechanical Engineering Portfolio</title>
+<meta name="description" content="기계공학 전공자로서 시뮬레이션, 설계 및 데이터 분석 프로젝트를 소개하는 포트폴리오입니다.">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ===== PRIVATE 섹션 전용 스타일 (기존 style.css는 건드리지 않음) ===== */
+  #private{ padding:60px 20px; max-width:640px; margin:0 auto; }
+  #private .private-box{ border:1px solid #ddd; border-radius:12px; padding:28px 24px; }
+  #private .private-lock-icon{ font-size:28px; margin-bottom:10px; }
+  #private label{ display:block; font-size:13px; color:#666; margin:14px 0 6px; }
+  #private input[type="email"],
+  #private input[type="text"],
+  #private textarea{
+    width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid #ccc;
+    border-radius:8px; font-size:14px; font-family:inherit;
+  }
+  #private textarea{ min-height:120px; resize:vertical; }
+  #private button{
+    margin-top:12px; padding:10px 18px; border:none; border-radius:8px;
+    background:#1a1a1a; color:#fff; font-size:14px; cursor:pointer; margin-right:8px;
+  }
+  #private button.secondary{ background:#fff; color:#1a1a1a; border:1px solid #1a1a1a; }
+  #private button:disabled{ opacity:0.5; cursor:default; }
+  #private .private-msg{ font-size:13px; margin-top:10px; color:#c4623a; }
+  #private .passkey-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 0; border-bottom:1px solid #eee; font-size:13px;
+  }
+  #private .passkey-row button{ margin:0; padding:6px 12px; font-size:12px; background:#c4623a; }
+  #private .private-note-view{
+    white-space:pre-wrap; background:#fafafa; border-radius:8px; padding:16px; font-size:14px; line-height:1.6;
+  }
+  #private .hidden{ display:none !important; }
+</style>
 </head>
-
 <body>
 
-    <!-- =========================
-         Navigation
-    ========================== -->
-    <header>
-        <nav aria-label="주요 메뉴">
-            <a href="#home">HOME</a>
-            <a href="#about">ABOUT</a>
-            <a href="#projects">PROJECTS</a>
-            <a href="#skills">SKILLS</a>
-            <a href="#contact">CONTACT</a>
-        </nav>
-    </header>
+<!-- =========================
+     Navigation
+========================== -->
+<header>
+<nav aria-label="주요 메뉴">
+<a href="#home">HOME</a>
+<a href="#about">ABOUT</a>
+<a href="#projects">PROJECTS</a>
+<a href="#skills">SKILLS</a>
+<a href="#contact">CONTACT</a>
+<a href="#private">PRIVATE</a>
+</nav>
+</header>
 
+<main>
 
-    <main>
+<!-- =========================
+     Home
+========================== -->
+<section id="home" aria-labelledby="home-title">
+<div class="home-content">
+<p>Mechanical Engineering Portfolio</p>
+<h1 id="home-title">
+문제를 분석하고,<br>
+직접 해결책을 구현하는 엔지니어
+</h1>
+<p>
+기계공학을 기반으로 시뮬레이션과 설계,
+데이터 분석을 활용해 문제를 해결해왔습니다.
+</p>
+<a href="#projects">프로젝트 보기</a>
+</div>
 
-        <!-- =========================
-             Home
-        ========================== -->
-        <section id="home" aria-labelledby="home-title">
-
-    <div class="home-content">
-
-        <p>Mechanical Engineering Portfolio</p>
-
-        <h1 id="home-title">
-            문제를 분석하고,<br>
-            직접 해결책을 구현하는 엔지니어
-        </h1>
-
-        <p>
-            기계공학을 기반으로 시뮬레이션과 설계,
-            데이터 분석을 활용해 문제를 해결해왔습니다.
-        </p>
-
-        <a href="#projects">프로젝트 보기</a>
-
-    </div>
-
-
-    <div class="home-projects" aria-label="주요 프로젝트">
-
-        <article class="home-project-card">
-            <span>01</span>
-            <p class="project-card-title">Battery Cooling</p>
-            <p>배터리 냉각 시스템 최적화</p>
-        </article>
-
-        <article class="home-project-card">
-            <span>02</span>
-            <p class="project-card-title">Boxing Robot</p>
-            <p>실제 자동회피 복싱 로봇 제작</p>
-        </article>
-
-        <article class="home-project-card">
-            <span>03</span>
-            <p class="project-card-title">Building Wind</p>
-            <p>머신러닝 기반 빌딩풍 예측</p>
-        </article>
-
-    </div>
-
+<div class="home-projects" aria-label="주요 프로젝트">
+<article class="home-project-card">
+<span>01</span>
+<p class="project-card-title">Battery Cooling</p>
+<p>배터리 냉각 시스템 최적화</p>
+</article>
+<article class="home-project-card">
+<span>02</span>
+<p class="project-card-title">Boxing Robot</p>
+<p>실제 자동회피 복싱 로봇 제작</p>
+</article>
+<article class="home-project-card">
+<span>03</span>
+<p class="project-card-title">Building Wind</p>
+<p>머신러닝 기반 빌딩풍 예측</p>
+</article>
+</div>
 </section>
 
-        <!-- =========================
-             About
-        ========================== -->
-        <section id="about" aria-labelledby="about-title">
+<!-- =========================
+     About
+========================== -->
+<section id="about" aria-labelledby="about-title">
+<h2 id="about-title">About Me</h2>
+<p>
+기계공학을 전공하며 설계와 해석을 중심으로 다양한 프로젝트를
+경험했습니다. 문제를 발견했을 때 원인을 분석하고,
+적절한 도구를 활용해 해결책을 찾는 과정을 중요하게 생각합니다.
+</p>
 
-            <h2 id="about-title">About Me</h2>
+<article>
+<h3>문제를 분석하고 최적의 조건을 찾습니다</h3>
+<p>
+배터리 냉각 시스템 최적화 프로젝트에서 냉각 조건에 따른
+열적 거동을 분석하고 여러 조건을 비교했습니다.
+시뮬레이션 결과를 바탕으로 냉각 성능을 판단하고
+최적의 조건을 탐색했습니다.
+</p>
+</article>
 
-            <p>
-                기계공학을 전공하며 설계와 해석을 중심으로 다양한 프로젝트를
-                경험했습니다. 문제를 발견했을 때 원인을 분석하고,
-                적절한 도구를 활용해 해결책을 찾는 과정을 중요하게 생각합니다.
-            </p>
+<article>
+<h3>아이디어를 실제 결과물로 구현합니다</h3>
+<p>
+자동회피 복싱 로봇 제작 프로젝트에서 로봇의 구조를 설계하고
+센서를 활용해 상대방의 움직임을 인식하도록 구성했습니다.
+제작 과정에서 발생한 문제를 수정하며 실제로 작동하는
+로봇을 완성했습니다.
+</p>
+</article>
 
+<article>
+<h3>새로운 기술을 실제 문제에 적용합니다</h3>
+<p>
+머신러닝을 활용한 빌딩풍 예측 프로젝트에서 데이터를 분석하고
+예측 모델을 구축했습니다. 기계공학적 문제에 데이터 기반
+접근법을 적용하며 새로운 기술을 활용하는 경험을 쌓았습니다.
+</p>
+</article>
+</section>
 
-            <!-- Strength 01 -->
-            <article>
-                <h3>문제를 분석하고 최적의 조건을 찾습니다</h3>
+<!-- =========================
+     Projects
+========================== -->
+<section id="projects" aria-labelledby="projects-title">
+<h2 id="projects-title">Projects</h2>
 
-                <p>
-                    배터리 냉각 시스템 최적화 프로젝트에서 냉각 조건에 따른
-                    열적 거동을 분석하고 여러 조건을 비교했습니다.
-                    시뮬레이션 결과를 바탕으로 냉각 성능을 판단하고
-                    최적의 조건을 탐색했습니다.
-                </p>
-            </article>
+<article>
+<h3>Battery Cooling System Optimization</h3>
+<p>
+전기차 배터리의 열적 안정성과 냉각 성능을 확보하기 위해
+냉각 조건을 분석하고 최적의 조건을 탐색한 프로젝트입니다.
+</p>
+<p>
+<strong>Focus:</strong>
+Simulation · Thermal Analysis · Optimization
+</p>
+<button
+type="button"
+class="project-toggle"
+aria-expanded="false"
+aria-controls="project-battery">
+자세히 보기
+</button>
+<div id="project-battery" hidden>
+<h4>Project Details</h4>
+<p>
+배터리 냉각 조건에 따른 온도 변화를 비교하고
+시뮬레이션 결과를 활용하여 냉각 성능을 분석했습니다.
+</p>
+<p>
+주요 경험: ANSYS · 열해석 · 설계 변수 비교
+</p>
+</div>
+</article>
 
+<article>
+<h3>Auto-Avoidance Boxing Robot</h3>
+<p>
+상대방의 움직임을 감지하고 자동으로 회피하는
+복싱 로봇을 직접 설계하고 제작한 프로젝트입니다.
+</p>
+<p>
+<strong>Focus:</strong>
+Mechanical Design · Sensor · Control · Fabrication
+</p>
+<button
+type="button"
+class="project-toggle"
+aria-expanded="false"
+aria-controls="project-boxing">
+자세히 보기
+</button>
+<div id="project-boxing" hidden>
+<h4>Project Details</h4>
+<p>
+로봇 구조를 설계하고 센서를 활용하여 상대방의 움직임을
+인식한 뒤 회피 동작으로 연결되도록 시스템을 구성했습니다.
+</p>
+<p>
+주요 경험: 구조 설계 · 센서 활용 · 제작 · 문제 개선
+</p>
+</div>
+</article>
 
-            <!-- Strength 02 -->
-            <article>
-                <h3>아이디어를 실제 결과물로 구현합니다</h3>
+<article>
+<h3>Machine Learning-Based Building Wind Prediction</h3>
+<p>
+건물 주변에서 발생하는 복잡한 바람의 변화를
+머신러닝을 활용해 예측한 프로젝트입니다.
+</p>
+<p>
+<strong>Focus:</strong>
+Machine Learning · Data Analysis · Prediction
+</p>
+<button
+type="button"
+class="project-toggle"
+aria-expanded="false"
+aria-controls="project-wind">
+자세히 보기
+</button>
+<div id="project-wind" hidden>
+<h4>Project Details</h4>
+<p>
+풍속 및 환경 데이터를 분석하고 머신러닝 기반의
+예측 모델을 구축하여 실제 현상과 예측 결과를 비교했습니다.
+</p>
+<p>
+주요 경험: 데이터 분석 · 머신러닝 · 예측 모델
+</p>
+</div>
+</article>
+</section>
 
-                <p>
-                    자동회피 복싱 로봇 제작 프로젝트에서 로봇의 구조를 설계하고
-                    센서를 활용해 상대방의 움직임을 인식하도록 구성했습니다.
-                    제작 과정에서 발생한 문제를 수정하며 실제로 작동하는
-                    로봇을 완성했습니다.
-                </p>
-            </article>
+<!-- =========================
+     Skills
+========================== -->
+<section id="skills" aria-labelledby="skills-title">
+<h2 id="skills-title">Skills</h2>
+<ul>
+<li>ANSYS Workbench</li>
+<li>ANSYS Fluent</li>
+<li>MATLAB</li>
+<li>Mechanical Design</li>
+<li>CFD / Simulation</li>
+<li>Data Analysis</li>
+<li>Machine Learning</li>
+</ul>
+</section>
 
+<!-- =========================
+     Contact
+========================== -->
+<section id="contact" aria-labelledby="contact-title">
+<h2 id="contact-title">Contact</h2>
+<p>
+프로젝트와 기술 경험에 대해 더 알아보고 싶다면
+GitHub를 통해 확인할 수 있습니다.
+</p>
+<a
+href="https://github.com/nb02079-ai"
+target="_blank"
+rel="noopener noreferrer">
+GitHub
+</a>
+</section>
 
-            <!-- Strength 03 -->
-            <article>
-                <h3>새로운 기술을 실제 문제에 적용합니다</h3>
+<!-- =========================
+     Private (패스키로 잠긴 영역)
+========================== -->
+<section id="private" aria-labelledby="private-title">
+<h2 id="private-title">Private</h2>
+<div class="private-box">
 
-                <p>
-                    머신러닝을 활용한 빌딩풍 예측 프로젝트에서 데이터를 분석하고
-                    예측 모델을 구축했습니다. 기계공학적 문제에 데이터 기반
-                    접근법을 적용하며 새로운 기술을 활용하는 경험을 쌓았습니다.
-                </p>
-            </article>
+  <!-- 로그인 전: 안내 + 부트스트랩(이메일 OTP) + 패스키 로그인 -->
+  <div id="private-gate">
+    <div class="private-lock-icon">🔒</div>
+    <p>이 영역은 패스키(생체인증/보안키)로 잠겨 있습니다. 비밀번호는 없습니다.</p>
 
-        </section>
+    <div id="private-signedout-actions">
+      <button id="btn-passkey-signin" type="button">패스키로 로그인</button>
+      <button id="btn-show-bootstrap" type="button" class="secondary">처음이신가요? 이메일로 시작</button>
+    </div>
 
+    <div id="bootstrap-box" class="hidden">
+      <label for="bootstrap-email">이메일</label>
+      <input id="bootstrap-email" type="email" autocomplete="email" placeholder="you@example.com">
+      <button id="btn-send-otp" type="button">인증코드 받기</button>
 
-        <!-- =========================
-             Projects
-        ========================== -->
-        <section id="projects" aria-labelledby="projects-title">
+      <div id="otp-box" class="hidden">
+        <label for="otp-code">이메일로 받은 6자리 코드</label>
+        <input id="otp-code" type="text" inputmode="numeric" placeholder="123456">
+        <button id="btn-verify-otp" type="button">확인하고 로그인</button>
+      </div>
+    </div>
 
-            <h2 id="projects-title">Projects</h2>
+    <div id="private-msg" class="private-msg"></div>
+  </div>
 
+  <!-- 로그인 후: 패스키 관리 + 비공개 메모 -->
+  <div id="private-content" class="hidden">
+    <p>로그인됨: <strong id="private-user-email"></strong> &nbsp;
+      <button id="btn-signout" type="button" class="secondary">로그아웃</button>
+    </p>
 
-            <!-- Project 01 -->
-            <article>
-                <h3>Battery Cooling System Optimization</h3>
+    <h3 style="margin-top:24px;">내 패스키</h3>
+    <div id="passkey-list"></div>
+    <button id="btn-register-passkey" type="button">+ 패스키 새로 등록</button>
 
-                <p>
-                    전기차 배터리의 열적 안정성과 냉각 성능을 확보하기 위해
-                    냉각 조건을 분석하고 최적의 조건을 탐색한 프로젝트입니다.
-                </p>
+    <h3 style="margin-top:24px;">비공개 메모</h3>
+    <div id="note-view-mode">
+      <div id="note-view" class="private-note-view"></div>
+      <button id="btn-edit-note" type="button" class="secondary">수정</button>
+    </div>
+    <div id="note-edit-mode" class="hidden">
+      <textarea id="note-textarea" placeholder="나만 보는 메모를 적어보세요 (예: 다음 프로젝트 아이디어, 개인 목표 등 — 실제 개인정보는 넣지 마세요)"></textarea>
+      <button id="btn-save-note" type="button">저장</button>
+      <button id="btn-cancel-note" type="button" class="secondary">취소</button>
+    </div>
+  </div>
 
-                <p>
-                    <strong>Focus:</strong>
-                    Simulation · Thermal Analysis · Optimization
-                </p>
+</div>
+</section>
 
-                <button
-                    type="button"
-                    class="project-toggle"
-                    aria-expanded="false"
-                    aria-controls="project-battery">
-                    자세히 보기
-                </button>
+</main>
 
-                <div id="project-battery" hidden>
-                    <h4>Project Details</h4>
+<!-- =========================
+     Footer
+========================== -->
+<footer>
+<p>
+© 2026 Mechanical Engineering Portfolio
+</p>
+</footer>
 
-                    <p>
-                        배터리 냉각 조건에 따른 온도 변화를 비교하고
-                        시뮬레이션 결과를 활용하여 냉각 성능을 분석했습니다.
-                    </p>
-
-                    <p>
-                        주요 경험: ANSYS · 열해석 · 설계 변수 비교
-                    </p>
-                </div>
-
-            </article>
-
-
-            <!-- Project 02 -->
-            <article>
-                <h3>Auto-Avoidance Boxing Robot</h3>
-
-                <p>
-                    상대방의 움직임을 감지하고 자동으로 회피하는
-                    복싱 로봇을 직접 설계하고 제작한 프로젝트입니다.
-                </p>
-
-                <p>
-                    <strong>Focus:</strong>
-                    Mechanical Design · Sensor · Control · Fabrication
-                </p>
-
-                <button
-                    type="button"
-                    class="project-toggle"
-                    aria-expanded="false"
-                    aria-controls="project-boxing">
-                    자세히 보기
-                </button>
-
-                <div id="project-boxing" hidden>
-                    <h4>Project Details</h4>
-
-                    <p>
-                        로봇 구조를 설계하고 센서를 활용하여 상대방의 움직임을
-                        인식한 뒤 회피 동작으로 연결되도록 시스템을 구성했습니다.
-                    </p>
-
-                    <p>
-                        주요 경험: 구조 설계 · 센서 활용 · 제작 · 문제 개선
-                    </p>
-                </div>
-
-            </article>
-
-
-            <!-- Project 03 -->
-            <article>
-                <h3>Machine Learning-Based Building Wind Prediction</h3>
-
-                <p>
-                    건물 주변에서 발생하는 복잡한 바람의 변화를
-                    머신러닝을 활용해 예측한 프로젝트입니다.
-                </p>
-
-                <p>
-                    <strong>Focus:</strong>
-                    Machine Learning · Data Analysis · Prediction
-                </p>
-
-                <button
-                    type="button"
-                    class="project-toggle"
-                    aria-expanded="false"
-                    aria-controls="project-wind">
-                    자세히 보기
-                </button>
-
-                <div id="project-wind" hidden>
-                    <h4>Project Details</h4>
-
-                    <p>
-                        풍속 및 환경 데이터를 분석하고 머신러닝 기반의
-                        예측 모델을 구축하여 실제 현상과 예측 결과를 비교했습니다.
-                    </p>
-
-                    <p>
-                        주요 경험: 데이터 분석 · 머신러닝 · 예측 모델
-                    </p>
-                </div>
-
-            </article>
-
-        </section>
-
-
-        <!-- =========================
-             Skills
-        ========================== -->
-        <section id="skills" aria-labelledby="skills-title">
-
-            <h2 id="skills-title">Skills</h2>
-
-            <ul>
-                <li>ANSYS Workbench</li>
-                <li>ANSYS Fluent</li>
-                <li>MATLAB</li>
-                <li>Mechanical Design</li>
-                <li>CFD / Simulation</li>
-                <li>Data Analysis</li>
-                <li>Machine Learning</li>
-            </ul>
-
-        </section>
-
-
-        <!-- =========================
-             Contact
-        ========================== -->
-        <section id="contact" aria-labelledby="contact-title">
-
-            <h2 id="contact-title">Contact</h2>
-
-            <p>
-                프로젝트와 기술 경험에 대해 더 알아보고 싶다면
-                GitHub를 통해 확인할 수 있습니다.
-            </p>
-
-            <!-- 실제 GitHub 주소를 나중에 입력 -->
-            <a
-                href="https://github.com/nb02079-ai"
-                target="_blank"
-                rel="noopener noreferrer">
-                GitHub
-            </a>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         Footer
-    ========================== -->
-    <footer>
-        <p>
-            © 2026 Mechanical Engineering Portfolio
-        </p>
-    </footer>
-
-
-    <!-- JavaScript는 다음 단계에서 연결 -->
-    <script src="script.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ==== Supabase 프로젝트 정보 ====
+  const SUPABASE_URL = "https://YOUR_PROJECT.supabase.co";
+  const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
+  // ===============================
+</script>
+<script src="script.js"></script>
+<script src="auth.js"></script>
 </body>
 </html>
