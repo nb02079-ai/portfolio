@@ -50,7 +50,10 @@ async function sendOtp() {
   const email = document.getElementById('bootstrap-email').value.trim();
   if (!email) { showMsg('이메일을 입력하세요.', true); return; }
   showMsg('인증코드를 보내는 중...', false);
-  const { error } = await sb.auth.signInWithOtp({ email });
+  const { error } = await sb.auth.signInWithOtp({
+    email,
+    options: { emailRedirectTo: 'https://nb02079-ai.github.io/portfolio/' },
+  });
   if (error) { showMsg('전송 실패: ' + error.message, true); return; }
   document.getElementById('otp-box').classList.remove('hidden');
   showMsg('이메일로 6자리 코드를 보냈어요. 코드를 확인해서 입력해주세요.', false);
