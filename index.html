@@ -3,266 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>도형 | Mechanical Engineering Portfolio</title>
-<meta name="description" content="기계공학 전공자로서 시뮬레이션, 설계 및 데이터 분석 프로젝트를 소개하는 포트폴리오입니다.">
+<title>이도형 | 공학, 나의 뿌리</title>
+<meta name="description" content="기계공학에서 AI·네트워크 보안으로, 여러 분야를 잇는 공학자 이도형의 자기소개입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="style.css">
-<style>
-  /* ===== PRIVATE 섹션 전용 스타일 (기존 style.css는 건드리지 않음) ===== */
-  #private{ padding:60px 20px; max-width:640px; margin:0 auto; }
-  #private .private-box{ border:1px solid #ddd; border-radius:12px; padding:28px 24px; }
-  #private .private-lock-icon{ font-size:28px; margin-bottom:10px; }
-  #private label{ display:block; font-size:13px; color:#666; margin:14px 0 6px; }
-  #private input[type="email"],
-  #private input[type="text"],
-  #private textarea{
-    width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid #ccc;
-    border-radius:8px; font-size:14px; font-family:inherit;
-  }
-  #private textarea{ min-height:120px; resize:vertical; }
-  #private button{
-    margin-top:12px; padding:10px 18px; border:none; border-radius:8px;
-    background:#1a1a1a; color:#fff; font-size:14px; cursor:pointer; margin-right:8px;
-  }
-  #private button.secondary{ background:#fff; color:#1a1a1a; border:1px solid #1a1a1a; }
-  #private button:disabled{ opacity:0.5; cursor:default; }
-  #private .private-msg{ font-size:13px; margin-top:10px; color:#c4623a; }
-  #private .passkey-row{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:10px 0; border-bottom:1px solid #eee; font-size:13px;
-  }
-  #private .passkey-row button{ margin:0; padding:6px 12px; font-size:12px; background:#c4623a; }
-  #private .private-note-view{
-    white-space:pre-wrap; background:#fafafa; border-radius:8px; padding:16px; font-size:14px; line-height:1.6;
-  }
-  #private .hidden{ display:none !important; }
-</style>
 </head>
 <body>
 
 <!-- =========================
-     Navigation
+     첫 화면
 ========================== -->
-<header>
-<nav aria-label="주요 메뉴">
-<a href="#home">HOME</a>
-<a href="#about">ABOUT</a>
-<a href="#projects">PROJECTS</a>
-<a href="#skills">SKILLS</a>
-<a href="#contact">CONTACT</a>
-<a href="#private">PRIVATE</a>
-</nav>
+<header class="hero" id="home">
+  <div class="wrap">
+    <p class="kicker">기계공학 · AI · 네트워크 보안</p>
+    <h1>이도형</h1>
+    <p class="tagline"><em>2019년 "왜 공부하는가"에 답하지 못해 멈췄다가</em>, 궁금한 쪽으로 움직이는 법을 찾아 다시 배우고 있는 사람</p>
+    <ul class="doors" aria-label="바로가기">
+      <li><a href="#story"><b>이야기</b><span>멈춤에서 지금까지</span></a></li>
+      <li><a href="#numbers"><b>숫자</b><span>기록으로 본 나</span></a></li>
+      <li><a href="#works"><b>대표작</b><span>논문 · 앱</span></a></li>
+      <li><a href="#resume"><b>이력서</b><span>문서 보기</span></a></li>
+    </ul>
+    <p class="contact">연락: <a href="mailto:nb02079@gmail.com">nb02079@gmail.com</a></p>
+  </div>
 </header>
 
 <main>
 
 <!-- =========================
-     Home
+     이야기
 ========================== -->
-<section id="home" aria-labelledby="home-title">
-<div class="home-content">
-<p>Mechanical Engineering Portfolio</p>
-<h1 id="home-title">
-문제를 분석하고,<br>
-직접 해결책을 구현하는 엔지니어
-</h1>
-<p>
-기계공학을 기반으로 시뮬레이션과 설계,
-데이터 분석을 활용해 문제를 해결해왔습니다.
-</p>
-<a href="#projects">프로젝트 보기</a>
-</div>
+<section id="story" aria-labelledby="story-title">
+  <div class="wrap">
+    <p class="label">이야기</p>
+    <h2 id="story-title">공학, 나의 뿌리</h2>
 
-<div class="home-projects" aria-label="주요 프로젝트">
-<article class="home-project-card">
-<span>01</span>
-<p class="project-card-title">Battery Cooling</p>
-<p>배터리 냉각 시스템 최적화</p>
-</article>
-<article class="home-project-card">
-<span>02</span>
-<p class="project-card-title">Boxing Robot</p>
-<p>실제 자동회피 복싱 로봇 제작</p>
-</article>
-<article class="home-project-card">
-<span>03</span>
-<p class="project-card-title">Building Wind</p>
-<p>머신러닝 기반 빌딩풍 예측</p>
-</article>
-</div>
+    <article class="chapter">
+      <h3>이유가 비어 있던 학기 <small>2019</small></h3>
+      <p>2019년 봄, 기계공학과 2학년이던 저는 학교 앞 카페에서 아르바이트를 하며 공부하는 이유를 찾지 못한 채 한 학기를 보내고 있었습니다. 카페에서는 주문이 들어오면 커피를 만들면 됐지만, 강의실에서는 이 식을 무엇을 위해 적는지 떠오르지 않았습니다.</p>
+      <p>돌아보면 그 빈자리는 오래전부터 있었습니다. 중학생 때 저는 평범하게 학원에 다니며 공부했고, 수학과 과학 성적이 좋아 선생님의 권유로 대구의 과학고에 갔습니다. 기숙사에서 친구들과 지내며 수업을 열심히 들은 3년은 즐거웠습니다. 그때 수학이 재미있어서 했는지, 성적이 좋으니 재미있었는지는 따져 보지 않았습니다. 그 질문 없이도 하루하루가 잘 굴러갔고, 잘하는 것을 이어 2018년 기계공학과에 입학했습니다. 아무도 재촉하지 않는 대학에서 그 질문이 처음으로 답을 요구했습니다.</p>
+      <p>1학기 성적이 나온 날, 카페에서 일하다가 학사경고를 확인했습니다. 어렴풋이 예상하던 일이었습니다. 잘한다는 것 하나로 달려온 길이 거기서 멈췄고, 이대로 강의실에 돌아가면 같은 일이 되풀이될 것 같아 그해 2학기에 휴학했습니다.</p>
+    </article>
+
+    <article class="chapter">
+      <h3>생활관의 저녁 <small>2020 – 2022</small></h3>
+      <p>2020년, 춘천의 생활관. 코로나로 휴가가 막혀 일과 뒤 긴 저녁을 그곳에서 보내야 했습니다. 처음에는 저도 휴대폰만 들여다봤습니다. 반납할 때가 되면 무엇을 봤는지 기억나지 않는 저녁들이었습니다. 그러다 운동을 시작했고, 분야를 가리지 않고 택배로 책을 주문해 읽었습니다. 그렇게 지내다 보니 어느새 공학수학 문제를 다시 풀고 있었습니다. 시험도 학점도 없는, 아무도 시키지 않은 공부였습니다.</p>
+      <p>그 저녁들에 알게 되었습니다. 2019년의 저는 공부할 단 하나의 이유를 찾다가 멈췄던 것이었습니다. 하지만 이유가 하나일 필요는 없었습니다. 궁금한 쪽으로 움직이다 보면 저는 결국 다시 공부하는 사람이었습니다.</p>
+      <p>그래서 2022년 복학한 뒤에는 전공만 붙들지 않았고, 2019년에 저를 멈춰 세웠던 전공 수업도 피하지 않았습니다. 그 곁에 스포츠·역사·언어·정치·경제·생체공학·반도체 강의를 두루 더해 들었고, 독서토론 동아리에서 다른 전공 사람들과 같은 책을 읽고 이야기했습니다. 그렇게 2026년 2월에 졸업했습니다.</p>
+    </article>
+
+    <article class="chapter">
+      <h3>더 나아진 지금 <small>2026</small></h3>
+      <p>2026년 9월 7일, 몸살이 난 날에도 저는 출석해 쉬는 시간마다 놓친 부분을 복습했습니다.</p>
+      <blockquote>아프지만 출석하여 과제를 진행하시는 모습이 보기 좋다.<cite>— 같은 날 동료가 남긴 기록</cite></blockquote>
+      <p>그보다 앞선 9월 2일에는 전날 예비군으로 놓친 수업을 다 메우지 못해 기록에 "일부 실천"이라고 그대로 적었고, 팀원들의 도움으로 따라잡았습니다. 2019년이었다면 그냥 넘겼을 하루들입니다. 졸업 뒤 AI와 네트워크 보안을 새로 배우고 있는 지금, 저에게 공학은 상황을 분석하고 원인과 결과를 찾는 사고방식입니다.</p>
+      <p class="closing">여러 분야를 접하고 그 사이를 잇는 일, 그것이 제가 되고 싶은 공학자의 모습입니다.</p>
+    </article>
+  </div>
 </section>
 
 <!-- =========================
-     About
+     숫자 (과정 3에서 채움)
 ========================== -->
-<section id="about" aria-labelledby="about-title">
-<h2 id="about-title">About Me</h2>
-<p>
-기계공학을 전공하며 설계와 해석을 중심으로 다양한 프로젝트를
-경험했습니다. 문제를 발견했을 때 원인을 분석하고,
-적절한 도구를 활용해 해결책을 찾는 과정을 중요하게 생각합니다.
-</p>
-
-<article>
-<h3>문제를 분석하고 최적의 조건을 찾습니다</h3>
-<p>
-배터리 냉각 시스템 최적화 프로젝트에서 냉각 조건에 따른
-열적 거동을 분석하고 여러 조건을 비교했습니다.
-시뮬레이션 결과를 바탕으로 냉각 성능을 판단하고
-최적의 조건을 탐색했습니다.
-</p>
-</article>
-
-<article>
-<h3>아이디어를 실제 결과물로 구현합니다</h3>
-<p>
-자동회피 복싱 로봇 제작 프로젝트에서 로봇의 구조를 설계하고
-센서를 활용해 상대방의 움직임을 인식하도록 구성했습니다.
-제작 과정에서 발생한 문제를 수정하며 실제로 작동하는
-로봇을 완성했습니다.
-</p>
-</article>
-
-<article>
-<h3>새로운 기술을 실제 문제에 적용합니다</h3>
-<p>
-머신러닝을 활용한 빌딩풍 예측 프로젝트에서 데이터를 분석하고
-예측 모델을 구축했습니다. 기계공학적 문제에 데이터 기반
-접근법을 적용하며 새로운 기술을 활용하는 경험을 쌓았습니다.
-</p>
-</article>
+<section id="numbers" aria-labelledby="numbers-title">
+  <div class="wrap">
+    <p class="label">숫자</p>
+    <h2 id="numbers-title">기록으로 본 나</h2>
+    <div class="pending">리추얼 기록에서 뽑은 회복탄력성·과제지속력 숫자가 출처와 함께 들어갈 자리입니다.</div>
+  </div>
 </section>
 
 <!-- =========================
-     Projects
+     대표작
 ========================== -->
-<section id="projects" aria-labelledby="projects-title">
-<h2 id="projects-title">Projects</h2>
+<section id="works" aria-labelledby="works-title">
+  <div class="wrap">
+    <p class="label">대표작</p>
+    <h2 id="works-title">직접 만든 것</h2>
+    <div class="works">
+      <article class="work">
+        <div class="tag">논문 · 2026</div>
+        <h3>높은 탐지 성능은 무엇을 측정하는가 — 호스트 행위 기반 악성코드 탐지 평가의 네 층위 분석</h3>
+        <p>정확도·F1 같은 지표 하나로 보고되는 악성코드 탐지 성능이 실제로 무엇을 측정하는지, 벤치마크·모델·개선·해석의 네 층위로 나눠 검증했습니다. CIC-MalMem-2022에서는 실행 중인 서비스 수 하나만으로 정확도 99.65%에 도달할 수 있음을 보였습니다.</p>
+        <div class="links">
+          <a href="https://github.com/nb02079-ai/What-Does-High-Detection-Performance-Measure/blob/main/04_%EB%85%BC%EB%AC%B8/%ED%88%AC%EA%B3%A0%EB%B3%B8/%EB%85%BC%EB%AC%B8_%EB%B3%B8%EB%AC%B8_v3.pdf" target="_blank" rel="noopener noreferrer">논문 PDF →</a>
+          <a href="https://github.com/nb02079-ai/What-Does-High-Detection-Performance-Measure" target="_blank" rel="noopener noreferrer">저장소 →</a>
+        </div>
+      </article>
+      <article class="work empty">
+        <div class="tag">앱</div>
+        <h3>준비 중</h3>
+        <p>다음 과제에서 만든 앱이 이 자리에 들어갑니다.</p>
+      </article>
+    </div>
 
-<article>
-<h3>Battery Cooling System Optimization</h3>
-<p>
-전기차 배터리의 열적 안정성과 냉각 성능을 확보하기 위해
-냉각 조건을 분석하고 최적의 조건을 탐색한 프로젝트입니다.
-</p>
-<p>
-<strong>Focus:</strong>
-Simulation · Thermal Analysis · Optimization
-</p>
-<button
-type="button"
-class="project-toggle"
-aria-expanded="false"
-aria-controls="project-battery">
-자세히 보기
-</button>
-<div id="project-battery" hidden>
-<h4>Project Details</h4>
-<p>
-배터리 냉각 조건에 따른 온도 변화를 비교하고
-시뮬레이션 결과를 활용하여 냉각 성능을 분석했습니다.
-</p>
-<p>
-주요 경험: ANSYS · 열해석 · 설계 변수 비교
-</p>
-</div>
-</article>
+    <h3 class="sub" id="projects-title">기계공학 프로젝트</h3>
+    <div class="projects">
+      <article class="project">
+        <h4>배터리 냉각 시스템 최적화</h4>
+        <p>전기차 배터리의 열적 안정성과 냉각 성능을 확보하기 위해 냉각 조건을 분석하고 최적의 조건을 탐색했습니다.</p>
+        <p class="focus">Simulation · Thermal Analysis · Optimization</p>
+        <button type="button" class="project-toggle" aria-expanded="false" aria-controls="project-battery">자세히 보기</button>
+        <div id="project-battery" class="project-detail" hidden>
+          <p>배터리 냉각 조건에 따른 온도 변화를 비교하고 시뮬레이션 결과를 활용하여 냉각 성능을 분석했습니다.</p>
+          <p class="focus">주요 경험: ANSYS · 열해석 · 설계 변수 비교</p>
+        </div>
+      </article>
+      <article class="project">
+        <h4>자동 회피 복싱 로봇 제작</h4>
+        <p>상대방의 움직임을 감지하고 자동으로 회피하는 복싱 로봇을 직접 설계하고 제작했습니다.</p>
+        <p class="focus">Mechanical Design · Sensor · Control · Fabrication</p>
+        <button type="button" class="project-toggle" aria-expanded="false" aria-controls="project-boxing">자세히 보기</button>
+        <div id="project-boxing" class="project-detail" hidden>
+          <p>로봇 구조를 설계하고 센서를 활용하여 상대방의 움직임을 인식한 뒤 회피 동작으로 연결되도록 시스템을 구성했습니다.</p>
+          <p class="focus">주요 경험: 구조 설계 · 센서 활용 · 제작 · 문제 개선</p>
+        </div>
+      </article>
+      <article class="project">
+        <h4>머신러닝 기반 빌딩풍 예측</h4>
+        <p>건물 주변에서 발생하는 복잡한 바람의 변화를 머신러닝으로 예측했습니다.</p>
+        <p class="focus">Machine Learning · Data Analysis · Prediction</p>
+        <button type="button" class="project-toggle" aria-expanded="false" aria-controls="project-wind">자세히 보기</button>
+        <div id="project-wind" class="project-detail" hidden>
+          <p>풍속 및 환경 데이터를 분석하고 머신러닝 기반의 예측 모델을 구축하여 실제 현상과 예측 결과를 비교했습니다.</p>
+          <p class="focus">주요 경험: 데이터 분석 · 머신러닝 · 예측 모델</p>
+        </div>
+      </article>
+    </div>
 
-<article>
-<h3>Auto-Avoidance Boxing Robot</h3>
-<p>
-상대방의 움직임을 감지하고 자동으로 회피하는
-복싱 로봇을 직접 설계하고 제작한 프로젝트입니다.
-</p>
-<p>
-<strong>Focus:</strong>
-Mechanical Design · Sensor · Control · Fabrication
-</p>
-<button
-type="button"
-class="project-toggle"
-aria-expanded="false"
-aria-controls="project-boxing">
-자세히 보기
-</button>
-<div id="project-boxing" hidden>
-<h4>Project Details</h4>
-<p>
-로봇 구조를 설계하고 센서를 활용하여 상대방의 움직임을
-인식한 뒤 회피 동작으로 연결되도록 시스템을 구성했습니다.
-</p>
-<p>
-주요 경험: 구조 설계 · 센서 활용 · 제작 · 문제 개선
-</p>
-</div>
-</article>
-
-<article>
-<h3>Machine Learning-Based Building Wind Prediction</h3>
-<p>
-건물 주변에서 발생하는 복잡한 바람의 변화를
-머신러닝을 활용해 예측한 프로젝트입니다.
-</p>
-<p>
-<strong>Focus:</strong>
-Machine Learning · Data Analysis · Prediction
-</p>
-<button
-type="button"
-class="project-toggle"
-aria-expanded="false"
-aria-controls="project-wind">
-자세히 보기
-</button>
-<div id="project-wind" hidden>
-<h4>Project Details</h4>
-<p>
-풍속 및 환경 데이터를 분석하고 머신러닝 기반의
-예측 모델을 구축하여 실제 현상과 예측 결과를 비교했습니다.
-</p>
-<p>
-주요 경험: 데이터 분석 · 머신러닝 · 예측 모델
-</p>
-</div>
-</article>
+    <h3 class="sub" id="skills-title">다뤄 본 도구</h3>
+    <ul class="skills" aria-labelledby="skills-title">
+      <li>ANSYS Workbench</li>
+      <li>ANSYS Fluent</li>
+      <li>MATLAB</li>
+      <li>Mechanical Design</li>
+      <li>CFD / Simulation</li>
+      <li>Data Analysis</li>
+      <li>Machine Learning</li>
+    </ul>
+  </div>
 </section>
 
 <!-- =========================
-     Skills
+     이력서 (과정 4에서 채움)
 ========================== -->
-<section id="skills" aria-labelledby="skills-title">
-<h2 id="skills-title">Skills</h2>
-<ul>
-<li>ANSYS Workbench</li>
-<li>ANSYS Fluent</li>
-<li>MATLAB</li>
-<li>Mechanical Design</li>
-<li>CFD / Simulation</li>
-<li>Data Analysis</li>
-<li>Machine Learning</li>
-</ul>
+<section id="resume" aria-labelledby="resume-title">
+  <div class="wrap">
+    <p class="label">이력서</p>
+    <h2 id="resume-title">문서</h2>
+    <div class="pending">이력서 · 자기소개서 · 경력기술서 파일이 연결될 자리입니다.</div>
+  </div>
 </section>
 
 <!-- =========================
-     Contact
+     Private (패스키로 잠긴 영역, 8번 과제)
 ========================== -->
-<section id="contact" aria-labelledby="contact-title">
-<h2 id="contact-title">Contact</h2>
-<p>
-프로젝트와 기술 경험에 대해 더 알아보고 싶다면
-GitHub를 통해 확인할 수 있습니다.
-</p>
-<a
-href="https://github.com/nb02079-ai"
-target="_blank"
-rel="noopener noreferrer">
-GitHub
-</a>
-</section>
-
-<!-- =========================
-     Private (패스키로 잠긴 영역)
-========================== -->
+<div class="wrap">
 <section id="private" aria-labelledby="private-title">
+<p class="label">비공개</p>
 <h2 id="private-title">Private</h2>
 <div class="private-box">
 
@@ -297,11 +198,11 @@ GitHub
       <button id="btn-signout" type="button" class="secondary">로그아웃</button>
     </p>
 
-    <h3 style="margin-top:24px;">내 패스키</h3>
+    <h3>내 패스키</h3>
     <div id="passkey-list"></div>
     <button id="btn-register-passkey" type="button">+ 패스키 새로 등록</button>
 
-    <h3 style="margin-top:24px;">비공개 메모</h3>
+    <h3>비공개 메모</h3>
     <div id="note-view-mode">
       <div id="note-view" class="private-note-view"></div>
       <button id="btn-edit-note" type="button" class="secondary">수정</button>
@@ -315,16 +216,12 @@ GitHub
 
 </div>
 </section>
+</div>
 
 </main>
 
-<!-- =========================
-     Footer
-========================== -->
 <footer>
-<p>
-© 2026 Mechanical Engineering Portfolio
-</p>
+  <div class="wrap">© 2026 이도형</div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

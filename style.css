@@ -1,761 +1,93 @@
 /* =========================================================
-   기본 설정
-========================================================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px;
-}
-
-body {
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        "Noto Sans KR",
-        Arial,
-        sans-serif;
-
-    color: #1f2937;
-    background-color: #f8fafc;
-
-    line-height: 1.7;
-
-    overflow-x: hidden;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button {
-    font: inherit;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-
-/* =========================================================
-   공통 레이아웃
-========================================================= */
-
-section {
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 100px 40px;
-}
-
-h1,
-h2,
-h3,
-h4 {
-    line-height: 1.25;
-    color: #111827;
-}
-
-h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    margin-bottom: 40px;
-}
-
-h3 {
-    font-size: 1.25rem;
-}
-
-p {
-    color: #4b5563;
-}
-
-
-/* =========================================================
-   Navigation
-========================================================= */
-
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 72px;
-
-    display: flex;
-    align-items: center;
-
-    background-color: rgba(248, 250, 252, 0.92);
-
-    border-bottom: 1px solid #e5e7eb;
-
-    backdrop-filter: blur(12px);
-
-    z-index: 1000;
-}
-
-nav {
-    width: 100%;
-    max-width: 1400px;
-
-    margin: 0 auto;
-    padding: 0 40px;
-
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    gap: 32px;
-}
-
-nav a {
-    position: relative;
-
-    font-size: 0.9rem;
-    font-weight: 600;
-
-    color: #4b5563;
-
-    transition:
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-nav a::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -6px;
-
-    width: 0;
-    height: 2px;
-
-    background-color: #2563eb;
-
-    transition: width 0.2s ease;
-}
-
-nav a:hover {
-    color: #2563eb;
-}
-
-nav a:hover::after {
-    width: 100%;
-}
-
-
-/* =========================================================
-   키보드 접근성
-========================================================= */
-
-a:focus-visible,
-button:focus-visible {
-    outline: 3px solid #2563eb;
-    outline-offset: 4px;
-}
-
-
-/* =========================================================
-   Home
-========================================================= */
-
-#home {
-    min-height: 100vh;
-
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-
-    align-items: center;
-
-    gap: 70px;
-
-    padding-top: 100px;
-    padding-bottom: 60px;
-}
-
-
-/* 왼쪽 소개 영역 */
-
-.home-content {
-    min-width: 0;
-}
-
-#home .home-content > p:first-child {
-    margin-bottom: 20px;
-
-    color: #2563eb;
-
-    font-size: 0.9rem;
-    font-weight: 700;
-
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-#home h1 {
-    max-width: 850px;
-
-    font-size: clamp(2.7rem, 5vw, 5rem);
-    font-weight: 800;
-
-    letter-spacing: -0.04em;
-
-    margin-bottom: 28px;
-}
-
-#home h1::after {
-    content: "";
-
-    display: block;
-
-    width: 70px;
-    height: 4px;
-
-    margin-top: 25px;
-
-    background-color: #2563eb;
-}
-
-#home .home-content > p:nth-of-type(2) {
-    max-width: 600px;
-
-    font-size: 1.05rem;
-
-    margin-bottom: 30px;
-}
-
-
-/* 프로젝트 버튼 */
-
-#home .home-content > a {
-    width: fit-content;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 12px 22px;
-
-    color: #ffffff;
-    background-color: #111827;
-
-    border-radius: 8px;
-
-    font-weight: 700;
-
-    transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-#home .home-content > a:hover {
-    background-color: #2563eb;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   Home Project Preview
-========================================================= */
-
-.home-projects {
-    display: flex;
-    flex-direction: column;
-
-    gap: 14px;
-
-    min-width: 0;
-}
-
-.home-project-card {
-    position: relative;
-
-    padding: 22px 24px;
-
-    background-color: #ffffff;
-
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-
-    box-shadow:
-        0 8px 25px rgba(15, 23, 42, 0.05);
-
-    transition:
-        transform 0.2s ease,
-        border-color 0.2s ease;
-}
-
-.home-project-card:hover {
-    transform: translateX(5px);
-
-    border-color: #2563eb;
-}
-
-.home-project-card span {
-    display: block;
-
-    margin-bottom: 6px;
-
-    color: #2563eb;
-
-    font-size: 0.75rem;
-    font-weight: 800;
-
-    letter-spacing: 0.08em;
-}
-
-.project-card-title {
-    margin-bottom: 5px;
-    font-size: 1.15rem;
-    font-weight: 700;
-}
-
-.home-project-card p {
-    font-size: 0.9rem;
-}
-
-#home > p:first-child {
-    margin-bottom: 20px;
-
-    color: #2563eb;
-
-    font-size: 0.9rem;
-    font-weight: 700;
-
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-#home h1 {
-    max-width: 900px;
-
-    font-size: clamp(2.8rem, 6vw, 5.5rem);
-    font-weight: 800;
-
-    letter-spacing: -0.04em;
-
-    margin-bottom: 28px;
-}
-
-#home h1::after {
-    content: "";
-
-    display: block;
-
-    width: 80px;
-    height: 4px;
-
-    margin-top: 30px;
-
-    background-color: #2563eb;
-}
-
-#home > p:nth-of-type(2) {
-    max-width: 680px;
-
-    font-size: 1.15rem;
-
-    margin-bottom: 36px;
-}
-
-#home > a {
-    width: fit-content;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 13px 24px;
-
-    color: #ffffff;
-    background-color: #111827;
-
-    border-radius: 8px;
-
-    font-weight: 700;
-
-    transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-#home > a:hover {
-    background-color: #2563eb;
-    transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   About
-========================================================= */
-
-#about {
-    border-top: 1px solid #e5e7eb;
-}
-
-#about > p {
-    max-width: 850px;
-
-    margin-bottom: 50px;
-
-    font-size: 1.05rem;
-}
-
-#about article {
-    padding: 30px 0;
-
-    border-top: 1px solid #e5e7eb;
-}
-
-#about article:last-child {
-    border-bottom: 1px solid #e5e7eb;
-}
-
-#about article h3 {
-    margin-bottom: 12px;
-}
-
-#about article p {
-    max-width: 900px;
-}
-
-
-/* =========================================================
-   Projects
-========================================================= */
-
-#projects {
-    border-top: 1px solid #e5e7eb;
-}
-
-#projects > article {
-    margin-bottom: 24px;
-
-    padding: 32px;
-
-    background-color: #ffffff;
-
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-
-    box-shadow:
-        0 8px 30px rgba(15, 23, 42, 0.05);
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-#projects > article:hover {
-    transform: translateY(-4px);
-
-    box-shadow:
-        0 16px 40px rgba(15, 23, 42, 0.08);
-}
-
-#projects article h3 {
-    margin-bottom: 14px;
-}
-
-#projects article > p {
-    max-width: 850px;
-
-    margin-bottom: 12px;
-}
-
-#projects article strong {
-    color: #111827;
-}
-
-
-/* =========================================================
-   Project Button
-========================================================= */
-
-.project-toggle {
-    margin-top: 18px;
-
-    padding: 10px 18px;
-
-    color: #ffffff;
-    background-color: #111827;
-
-    border: none;
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    font-weight: 600;
-
-    transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.project-toggle:hover {
-    background-color: #2563eb;
-    transform: translateY(-1px);
-}
-
-
-/* =========================================================
-   Project Details
-========================================================= */
-
-#projects article div[id^="project-"] {
-    margin-top: 24px;
-    padding-top: 24px;
-
-    border-top: 1px solid #e5e7eb;
-}
-
-#projects article div[id^="project-"] h4 {
-    margin-bottom: 10px;
-
-    font-size: 1rem;
-}
-
-#projects article div[id^="project-"] p {
-    margin-bottom: 8px;
-}
-
-
-/* =========================================================
-   Skills
-========================================================= */
-
-#skills {
-    border-top: 1px solid #e5e7eb;
-}
-
-#skills ul {
-    display: flex;
-    flex-wrap: wrap;
-
-    gap: 12px;
-
-    list-style: none;
-}
-
-#skills li {
-    padding: 10px 16px;
-
-    color: #1f2937;
-
-    background-color: #ffffff;
-
-    border: 1px solid #d1d5db;
-    border-radius: 999px;
-
-    font-size: 0.95rem;
-    font-weight: 600;
-}
-
-
-/* =========================================================
-   Contact
-========================================================= */
-
-#contact {
-    border-top: 1px solid #e5e7eb;
-}
-
-#contact p {
-    max-width: 650px;
-
-    margin-bottom: 24px;
-}
-
-#contact a {
-    display: inline-flex;
-
-    padding: 12px 22px;
-
-    color: #ffffff;
-    background-color: #111827;
-
-    border-radius: 8px;
-
-    font-weight: 700;
-
-    transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-#contact a:hover {
-    background-color: #2563eb;
-    transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   Footer
-========================================================= */
-
-footer {
-    padding: 40px;
-
-    text-align: center;
-
-    border-top: 1px solid #e5e7eb;
-
-    background-color: #f1f5f9;
-}
-
-footer p {
-    font-size: 0.85rem;
-}
-
-
-/* =========================================================
-   1366px 이하
-========================================================= */
-
-@media (max-width: 1366px) {
-
-    section {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
-
-    #home h1 {
-        font-size: clamp(2.7rem, 5vw, 4.5rem);
-    }
-}
-
-
-/* =========================================================
-   태블릿
-========================================================= */
-
-@media (max-width: 900px) {
-
-    header {
-        height: auto;
-        min-height: 64px;
-    }
-
-    nav {
-        justify-content: center;
-
-        gap: 20px;
-
-        padding-top: 14px;
-        padding-bottom: 14px;
-    }
-
-    nav a {
-        font-size: 0.8rem;
-    }
-
-    section {
-        padding: 80px 28px;
-    }
-
-    #home {
-        min-height: auto;
-
-        grid-template-columns: 1fr;
-
-        gap: 45px;
-
-        padding-top: 130px;
-    }
-
-    #home h1 {
-        font-size: clamp(2.5rem, 8vw, 4rem);
-    }
-
-    .home-projects {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-}
-
-/* =========================================================
-   모바일
-========================================================= */
-
-@media (max-width: 600px) {
-
-    html {
-        scroll-padding-top: 120px;
-    }
-
-    nav {
-        flex-wrap: wrap;
-        gap: 10px 18px;
-    }
-
-    section {
-        padding: 70px 20px;
-    }
-
-    #home {
-        padding-top: 140px;
-    }
-
-    #home h1 {
-        font-size: clamp(2.2rem, 11vw, 3.2rem);
-    }
-
-    #home .home-content > p:nth-of-type(2) {
-        font-size: 1rem;
-    }
-
-    .home-projects {
-        grid-template-columns: 1fr;
-    }
-
-    #projects > article {
-        padding: 24px;
-    }
-
-    #skills ul {
-        gap: 8px;
-    }
-
-    #skills li {
-        font-size: 0.85rem;
-        padding: 8px 13px;
-    }
-
-    footer {
-        padding: 30px 20px;
-    }
-
-}
-
-/* =========================================================
-   움직임 줄이기
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    html {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
+   이도형 자기소개 사이트 — 공통 스타일
+   ========================================================= */
+:root{
+  --bg:#f7f5f0; --surface:#ffffff; --ink:#1d1d1b; --muted:#5f5e58; --line:#e2ded4;
+  --accent:#2f5d50; --accent-soft:#e3ece8; --mark:#9a6b2f; --warn:#b4532a; --ok:#3f7a5d;
+  --serif:"Noto Serif KR",serif;
+  --sans:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#151614; --surface:#1d1f1c; --ink:#ecebe6; --muted:#a6a59d; --line:#33352f;
+    --accent:#8cc2ad; --accent-soft:#233029; --mark:#d4a865; --warn:#e08a63; --ok:#8cc2ad;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ---------- 첫 화면 ---------- */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:64px 0 40px}
+.hero .kicker{font-size:14px;letter-spacing:.08em;color:var(--muted);margin:0 0 18px}
+.hero h1{font-family:var(--serif);font-size:clamp(40px,8vw,64px);line-height:1.15;margin:0 0 22px;font-weight:700}
+.hero .tagline{font-size:clamp(19px,3.2vw,23px);line-height:1.6;margin:0 0 40px;max-width:30em}
+.hero .tagline em{font-style:normal;background:linear-gradient(transparent 62%,var(--accent-soft) 62%)}
+.doors{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0;padding:0;list-style:none}
+.doors a{display:block;text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:14px 14px 12px;transition:border-color .15s,transform .15s}
+.doors a:hover,.doors a:focus-visible{border-color:var(--accent);transform:translateY(-2px)}
+.doors b{display:block;font-size:16px}
+.doors span{display:block;font-size:13px;color:var(--muted);line-height:1.5;margin-top:2px}
+.contact{margin-top:28px;font-size:14px;color:var(--muted)}
+.contact a{color:var(--accent);text-underline-offset:3px}
+@media (max-width:560px){.doors{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- 섹션 공통 ---------- */
+main section{padding:72px 0;border-top:1px solid var(--line)}
+.label{font-size:13px;letter-spacing:.1em;color:var(--accent);font-weight:600;margin:0 0 10px}
+main h2{font-family:var(--serif);font-size:clamp(28px,5vw,36px);line-height:1.3;margin:0 0 32px}
+.sub{font-size:20px;margin:48px 0 16px}
+
+/* ---------- 이야기 ---------- */
+.chapter{margin:0 0 56px}
+.chapter:last-child{margin-bottom:0}
+.chapter h3{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;font-size:20px;margin:0 0 18px}
+.chapter h3 small{font-size:13px;font-weight:500;color:var(--mark);font-variant-numeric:tabular-nums}
+.chapter p{margin:0 0 1.1em}
+blockquote{margin:1.4em 0;padding:4px 0 4px 18px;border-left:3px solid var(--accent);color:var(--muted)}
+blockquote cite{display:block;font-style:normal;font-size:13px;margin-top:4px}
+.closing{font-family:var(--serif);font-size:20px;line-height:1.7;margin-top:28px}
+
+/* ---------- 숫자 · 대표작 · 프로젝트 · 이력서 ---------- */
+.pending{border:1px dashed var(--line);border-radius:12px;padding:22px;color:var(--muted);font-size:15px}
+.works{display:grid;gap:14px}
+.work{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
+.work .tag{font-size:12px;color:var(--accent);font-weight:600;letter-spacing:.06em}
+.work h3{font-size:18px;line-height:1.5;margin:6px 0 8px}
+.work p{margin:0 0 10px;font-size:15px;color:var(--muted);line-height:1.7}
+.work .links{display:flex;gap:16px;flex-wrap:wrap}
+.work .links a{font-size:14px;color:var(--accent);text-underline-offset:3px}
+.work.empty{border-style:dashed;background:transparent}
+
+.projects{display:grid;gap:12px}
+.project{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.project h4{font-size:16px;margin:0 0 4px}
+.project p{margin:0 0 6px;font-size:15px;color:var(--muted);line-height:1.7}
+.project .focus{font-size:13px}
+.project-toggle{margin-top:4px;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--ink);font:inherit;font-size:13px;cursor:pointer}
+.project-toggle:hover{border-color:var(--accent)}
+.project-detail{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.skills{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.skills li{font-size:14px;border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--surface)}
+
+/* ---------- PRIVATE (패스키 영역, 8번 과제) ---------- */
+#private .private-box{border:1px solid var(--line);border-radius:12px;padding:28px 24px;background:var(--surface)}
+#private .private-lock-icon{font-size:28px;margin-bottom:10px}
+#private label{display:block;font-size:13px;color:var(--muted);margin:14px 0 6px}
+#private input[type="email"],#private input[type="text"],#private textarea{
+  width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;background:var(--bg);color:var(--ink)}
+#private textarea{min-height:120px;resize:vertical}
+#private button{margin-top:12px;margin-right:8px;padding:10px 18px;border:none;border-radius:8px;background:var(--ink);color:var(--bg);font-size:14px;cursor:pointer;font-family:inherit}
+#private button.secondary{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+#private button:disabled{opacity:.5;cursor:default}
+#private h3{font-size:17px;margin:24px 0 8px}
+#private .private-msg{font-size:13px;margin-top:10px;color:var(--warn)}
+#private .passkey-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+#private .passkey-row button{margin:0;padding:6px 12px;font-size:12px;background:var(--warn);color:#fff}
+#private .private-note-view{white-space:pre-wrap;background:var(--bg);border-radius:8px;padding:16px;font-size:14px;line-height:1.6}
+#private .hidden{display:none !important}
+
+footer{padding:40px 0 56px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
