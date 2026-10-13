@@ -72,7 +72,62 @@
   <div class="wrap">
     <p class="label">숫자</p>
     <h2 id="numbers-title">기록으로 본 나</h2>
-    <div class="pending">리추얼 기록에서 뽑은 회복탄력성·과제지속력 숫자가 출처와 함께 들어갈 자리입니다.</div>
+    <!-- refresh:numbers:start (refresh.py가 만드는 구간, 직접 고치지 마세요) -->
+    <p class="pair"><span class="pair-then">2019년, 이유를 찾지 못한 한 학기는 학사경고로 끝났습니다.</span> <span class="pair-now">2026년 과정에서는 훈련일 40일 동안 결석 0일입니다.</span> <small>출처: 내 출석 기록 (2026-10-12 기준)</small></p>
+    <h3 class="sub">과제지속력</h3>
+    <div class="stats">
+      <article class="stat">
+        <p class="stat-num">0<span>일</span></p>
+        <p class="stat-label">훈련일 40일 가운데 결석</p>
+        <p class="stat-src">내 출석 기록 · 출석률 97.5%(39/40, 확정 전 1일 포함)</p>
+      </article>
+      <article class="stat">
+        <p class="stat-num">11<span>/11</span></p>
+        <p class="stat-label">과제 제출, 모두 최종 확인 완료</p>
+        <p class="stat-src">내 제출 현황 · T01~T11</p>
+      </article>
+      <article class="stat">
+        <p class="stat-num">35<span>/36</span></p>
+        <p class="stat-label">저녁 기록에서 “실천했다”</p>
+        <p class="stat-src">리추얼 기록 · 8/11~10/12, 10주 동안 37일 기록</p>
+      </article>
+    </div>
+    <h3 class="sub">회복탄력성</h3>
+    <div class="stats">
+      <article class="stat">
+        <p class="stat-num">1<span>일</span></p>
+        <p class="stat-label">“일부 실천”에서 다시 “실천했다”까지</p>
+        <p class="stat-src">리추얼 기록 · 9/2 일부 실천 → 9/3 실천</p>
+      </article>
+      <article class="stat">
+        <p class="stat-num">4<span>/4일</span></p>
+        <p class="stat-label">몸이 좋지 않던 날에도 기록하고 실천</p>
+        <p class="stat-src">리추얼 기록 · 9/7~9/10</p>
+      </article>
+      <article class="stat">
+        <p class="stat-num">9/2</p>
+        <p class="stat-label">놓친 수업을 복습하기로 한 날에도 과제 제출</p>
+        <p class="stat-src">리추얼 기록 9/2 '오늘의 첫 행동' · 내 제출 현황 T03</p>
+      </article>
+    </div>
+    <h3 class="sub">기록에서 고른 장면</h3>
+    <div class="ability">
+      <h4>자기조절력</h4>
+      <p>계획한 것을 지키고, 흐트러진 날은 스스로 되돌린 기록입니다. 9월 9일 아침 기록에 “컨디션이 안좋아서 복구하기 위해 관리를 열심히 하고있다”라고 적었습니다.</p>
+      <p class="stat-src">근거: 리추얼 기록 9/9</p>
+    </div>
+    <div class="ability">
+      <h4>대인관계력</h4>
+      <p>함께 공부한 동료들이 기록에 남겨 준 저의 모습입니다. 8월 11일, 동료가 “토론을 함에 있어, 상대방의 관심사를 빠르게 캐치 및 활용할 수 있어 단체 프로젝트에 있어 원활하게 진행할 수 있었습니다”라고 적어 주었습니다. 8월 11일, 동료가 “과제 진행에서 다양한 의의를 제시함으로서 깊은 주제로 토론할 수 있었다”라고 적어 주었습니다. 8월 25일, 동료가 “과제 시작단계에서 주도적으로 역할 정리해주는게 보기 좋다”라고 적어 주었습니다.</p>
+      <p class="stat-src">근거: 리추얼 기록 8/11, 8/25</p>
+    </div>
+    <div class="ability">
+      <h4>자기동기력</h4>
+      <p>아무도 시키지 않았지만 스스로 찾아 배운 기록입니다. 8월 21일 아침 기록에 “의문점이 생기면 스스로 탐구하여 해답을 찾아낸다”라고 적었습니다. 9월 16일 저녁 기록에 “모르는 부분에 대해 찾아가면서 논문작성을 발전시키고 있다”라고 적었습니다. 9월 16일 아침 기록에 “새로운 분야를 공부하면서 프로젝트를 동시에 진행하고 있다”라고 적었습니다.</p>
+      <p class="stat-src">근거: 리추얼 기록 8/21, 9/16</p>
+    </div>
+    <p class="stat-src">기준일 2026-10-12 · 이 칸은 기록 파일에서 자동으로 다시 셉니다.</p>
+    <!-- refresh:numbers:end -->
   </div>
 </section>
 
@@ -158,80 +213,12 @@
   </div>
 </section>
 
-<!-- =========================
-     Private (패스키로 잠긴 영역, 8번 과제)
-========================== -->
-<div class="wrap">
-<section id="private" aria-labelledby="private-title">
-<p class="label">비공개</p>
-<h2 id="private-title">Private</h2>
-<div class="private-box">
-
-  <!-- 로그인 전: 안내 + 부트스트랩(이메일 OTP) + 패스키 로그인 -->
-  <div id="private-gate">
-    <div class="private-lock-icon">🔒</div>
-    <p>이 영역은 패스키(생체인증/보안키)로 잠겨 있습니다. 비밀번호는 없습니다.</p>
-
-    <div id="private-signedout-actions">
-      <button id="btn-passkey-signin" type="button">패스키로 로그인</button>
-      <button id="btn-show-bootstrap" type="button" class="secondary">처음이신가요? 이메일로 시작</button>
-    </div>
-
-    <div id="bootstrap-box" class="hidden">
-      <label for="bootstrap-email">이메일</label>
-      <input id="bootstrap-email" type="email" autocomplete="email" placeholder="you@example.com">
-      <button id="btn-send-otp" type="button">인증코드 받기</button>
-
-      <div id="otp-box" class="hidden">
-        <label for="otp-code">이메일로 받은 6자리 코드</label>
-        <input id="otp-code" type="text" inputmode="numeric" placeholder="123456">
-        <button id="btn-verify-otp" type="button">확인하고 로그인</button>
-      </div>
-    </div>
-
-    <div id="private-msg" class="private-msg"></div>
-  </div>
-
-  <!-- 로그인 후: 패스키 관리 + 비공개 메모 -->
-  <div id="private-content" class="hidden">
-    <p>로그인됨: <strong id="private-user-email"></strong> &nbsp;
-      <button id="btn-signout" type="button" class="secondary">로그아웃</button>
-    </p>
-
-    <h3>내 패스키</h3>
-    <div id="passkey-list"></div>
-    <button id="btn-register-passkey" type="button">+ 패스키 새로 등록</button>
-
-    <h3>비공개 메모</h3>
-    <div id="note-view-mode">
-      <div id="note-view" class="private-note-view"></div>
-      <button id="btn-edit-note" type="button" class="secondary">수정</button>
-    </div>
-    <div id="note-edit-mode" class="hidden">
-      <textarea id="note-textarea" placeholder="나만 보는 메모를 적어보세요 (예: 다음 프로젝트 아이디어, 개인 목표 등 — 실제 개인정보는 넣지 마세요)"></textarea>
-      <button id="btn-save-note" type="button">저장</button>
-      <button id="btn-cancel-note" type="button" class="secondary">취소</button>
-    </div>
-  </div>
-
-</div>
-</section>
-</div>
-
 </main>
 
 <footer>
   <div class="wrap">© 2026 이도형</div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  // ==== Supabase 프로젝트 정보 ====
-  const SUPABASE_URL = "https://retoprodwpwjwbmldnxb.supabase.co";
-  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJldG9wcm9kd3B3andibWxkbnhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzNTU0OTcsImV4cCI6MjEwNDkzMTQ5N30.4mI665mEw-h1wtkUGgCEFbkW0nBi7Yav8vjBzoa2F3s";
-  // ===============================
-</script>
 <script src="script.js"></script>
-<script src="auth.js"></script>
 </body>
 </html>
