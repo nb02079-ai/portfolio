@@ -49,6 +49,13 @@
     for (i = n - 1; i > 0; i--) { j = Math.floor(r() * (i + 1)); t = idx[i]; idx[i] = idx[j]; idx[j] = t; }
     return idx;
   }
+  // 빈칸을 뺀 값이 한 가지 이하인 열 — 라벨에 대해 알려 주는 정보가 없다
+  function isSingle(c) { return c.distinct.length <= 1; }
+  function nameList(names, max) {
+    max = max || 6;
+    return names.slice(0, max).join(", ") + (names.length > max ? " 외 " + (names.length - max) + "개" : "");
+  }
+
   function toNum(s) {
     if (s === undefined || s === null) return NaN;
     s = String(s).trim();
@@ -268,19 +275,20 @@
     base /= test.length;
 
     var labelIdx = S.header.indexOf(labelName);
-    var feats = [], skippedConst = 0;
+    var feats = [], constNames = [];
     S.cols.forEach(function (c, j) {
       if (j === labelIdx || !c.numeric) return;
+      if (isSingle(c)) { constNames.push(c.name); return; }
       var vals = S.rows.map(function (r) { return toNum(r[j]); });
       var s = stump(vals, y, train, test);
       if (!s) return;
-      if (s.constant) { skippedConst++; return; }
+      if (s.constant) { constNames.push(c.name); return; }   // 학습 쪽 70%에서만 값이 하나뿐인 경우
       var gap = s.acc - base;
       feats.push({ name: c.name, acc: s.acc, bacc: s.bacc, gap: gap, thr: s.thr, leftPos: s.leftPos, missing: s.missing, level: levelOf(s.bacc) });
     });
     feats.sort(function (a, b) { return b.bacc - a.bacc || b.acc - a.acc || (a.name < b.name ? -1 : 1); });
     S.result = { labelName: labelName, posVal: posVal, y: y, train: train, test: test, base: base, feats: feats,
-                 skippedConst: skippedConst, nPos: nPos, majority: majority };
+                 constNames: constNames, nPos: nPos, majority: majority };
     S.metaResults = [];
     renderFeatures(false);
     fillMeta();
@@ -299,8 +307,11 @@
     tb.innerHTML = ""; v.innerHTML = "";
     if (!r.feats.length) {
       v.className = "verdict ok";
-      v.appendChild(el("p", "v-main", "숫자로 된 특징 열이 없어 1단계 점검을 할 수 없습니다."));
-      v.appendChild(el("p", "v-sub", "3단계에서 다른 열이 라벨과 얽혀 있는지 확인할 수 있습니다."));
+      v.appendChild(el("p", "v-main", r.constNames.length
+        ? "값이 여러 가지인 숫자 특징이 없어 이 단계 점검을 할 수 없습니다."
+        : "숫자로 된 특징 열이 없어 이 단계 점검을 할 수 없습니다."));
+      if (r.constNames.length) v.appendChild(el("p", "v-sub", "값이 하나뿐이라 뺀 특징 " + r.constNames.length + "개: " + nameList(r.constNames)));
+      v.appendChild(el("p", "v-sub", "글자로 된 열은 3단계에서 라벨과 얽혀 있는지 확인할 수 있습니다."));
       show($("btn-more"), false);
       return;
     }
@@ -316,7 +327,7 @@
     var nD = r.feats.filter(function (f) { return f.level.key === "danger"; }).length;
     var nW = r.feats.filter(function (f) { return f.level.key === "warn"; }).length;
     v.appendChild(el("p", "v-sub", "숫자 특징 " + r.feats.length + "개 가운데 거의 완전 분리 " + nD + "개, 지름길 후보 " + nW + "개" +
-      (r.skippedConst ? " · 값이 하나뿐인 특징 " + r.skippedConst + "개는 뺐습니다" : "") +
+      (r.constNames.length ? " · 값이 하나뿐이라 뺀 특징 " + r.constNames.length + "개(" + nameList(r.constNames) + ")" : "") +
       " · 판정 기준(앱이 정한 값): 균형 정확도 99% 이상이면 거의 완전 분리, 85% 이상이면 지름길 후보"));
     var list = all ? r.feats : r.feats.slice(0, SHOW_TOP);
     list.forEach(function (f, i) {
@@ -338,7 +349,13 @@
     var sel = $("meta-col"); sel.innerHTML = "";
     var labelName = S.result.labelName;
     var hint = /year|date|time|연도|날짜|source|host|machine|env|file|name|category|family|collect|수집/i;
-    var cols = S.cols.filter(function (c) { return c.name !== labelName; });
+    var cols = S.cols.filter(function (c) { return c.name !== labelName && !isSingle(c); });
+    var singles = S.cols.filter(function (c) { return c.name !== labelName && isSingle(c); }).map(function (c) { return c.name; });
+    $("meta-note").textContent = singles.length
+      ? "값이 하나뿐이라 확인할 것이 없는 열 " + singles.length + "개는 목록에서 뺐습니다: " + nameList(singles)
+      : "";
+    $("btn-meta").disabled = !cols.length;
+    if (!cols.length) $("meta-note").textContent = "라벨 말고는 확인할 수 있는 열이 없습니다." + (singles.length ? " (값이 하나뿐인 열 " + singles.length + "개 제외)" : "");
     cols.sort(function (a, b) {
       var sa = (!a.numeric ? 2 : 0) + (hint.test(a.name) ? 1 : 0), sb = (!b.numeric ? 2 : 0) + (hint.test(b.name) ? 1 : 0);
       return sb - sa;
@@ -350,7 +367,9 @@
 
   function runMeta() {
     var r = S.result, name = $("meta-col").value, j = S.header.indexOf(name);
+    if (j < 0) throw new Error("확인할 열을 골라 주세요.");
     var col = S.cols[j], scores, how;
+    if (isSingle(col)) throw new Error(name + " 열은 값이 하나뿐이라 라벨에 대해 알려 주는 것이 없습니다.");
     var numVals = S.rows.map(function (row) { return toNum(row[j]); });
     if (col.numeric) {
       var trainMean = 0, cnt = 0, i;
@@ -419,7 +438,9 @@
     L.push("- 라벨 열: " + mdCell(r.labelName) + " · 악성 값: " + mdCell(r.posVal) + " · 악성 " + r.nPos + "행 / 정상 " + (r.y.length - r.nPos) + "행");
     L.push("- 방법: 특징 하나와 기준값 하나(깊이 1 결정트리). 고정 시드 " + SEED + "로 섞고 정상·악성을 각각 70:30으로 나눠, 70%에서 균형 정확도가 가장 높은 기준값을 정하고 30%(" + r.test.length + "행)에서 측정");
     L.push("- 균형 정확도 = (악성 정답률 + 정상 정답률) ÷ 2. 찍기만 하면 50%라서 정상·악성 비율이 기울어도 비교할 수 있습니다.");
-    L.push("- 다수 클래스 기준선(정확도): " + pct(r.base), "");
+    L.push("- 다수 클래스 기준선(정확도): " + pct(r.base));
+    if (r.constNames.length) L.push("- 값이 하나뿐이라 뺀 특징 " + r.constNames.length + "개: " + mdCell(r.constNames.join(", ")));
+    L.push("");
     L.push("## 특징별 결과 (상위 " + Math.min(SHOW_TOP, r.feats.length) + "개)", "");
     L.push("| 순위 | 특징 | 균형 정확도 | 정확도 | 기준선 대비 | 규칙 | 판정 |", "| --- | --- | --- | --- | --- | --- | --- |");
     r.feats.slice(0, SHOW_TOP).forEach(function (f, i) {
@@ -475,8 +496,8 @@
   $("btn-meta").addEventListener("click", function () {
     try { runMeta(); }
     catch (e) {
-      var box = $("meta-result"); box.innerHTML = "";
-      box.appendChild(el("p", "msg err", e.message || String(e)));
+      renderMeta();   // 앞서 확인한 결과는 그대로 두고 안내만 덧붙인다
+      $("meta-result").appendChild(el("p", "msg err", e.message || String(e)));
     }
   });
   $("btn-save").addEventListener("click", function () { if (S && S.result) download("지름길-점검-결과.md", reportMd(), "text/markdown"); });
