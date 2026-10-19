@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>지름길 점검기 — 악성코드 데이터셋을 쓰기 전에</title>
+<meta name="description" content="악성코드 탐지 데이터셋에서 특징 하나만으로 라벨이 갈리는 지름길이 있는지 브라우저에서 점검합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="kicker">논문을 실제로 쓰는 도구 · 지름길 점검기</p>
+    <h1>이 데이터셋, 숫자 하나로 풀리지 않나요?</h1>
+    <p class="helps"><strong>이 앱은</strong> 공개 데이터셋으로 악성코드 탐지 모델을 만드는 학생·연구자가 <strong>데이터셋을 학습에 쓰기 전에</strong>, 특징 하나나 메타데이터 하나만으로 라벨이 얼마나 갈리는지 계산해 <strong>높은 정확도가 지름길에서 나올 수 있다는 위험</strong>을 알려 줍니다.</p>
+    <div class="paper">
+      <p class="paper-label">바탕 논문</p>
+      <p class="paper-title">높은 탐지 성능은 무엇을 측정하는가 — 호스트 행위 기반 악성코드 탐지 평가의 네 층위 분석</p>
+      <p class="paper-finding">논문 4.1절: CIC-MalMem-2022는 <b>실행 중인 서비스 수 하나</b>로 정확도 <b>99.65%</b>. DMBD 2025는 <b>수집 연도만으로</b> 라벨을 ROC-AUC <b>0.907</b>로 예측. 5.3절: 공개 벤치마크를 쓰기 전에 단순한 기준선과 메타데이터-라벨 관계부터 확인할 것.</p>
+      <p class="paper-links"><a href="https://github.com/nb02079-ai/What-Does-High-Detection-Performance-Measure" target="_blank" rel="noopener">논문 저장소 →</a></p>
+    </div>
+    <ol class="steps" aria-label="할 일 세 가지">
+      <li><b>1</b><span>데이터 넣기</span></li>
+      <li><b>2</b><span>지름길 특징 확인</span></li>
+      <li><b>3</b><span>메타데이터 확인 · 결과 저장</span></li>
+    </ol>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1단계 -->
+  <section class="card" id="step1" aria-labelledby="s1-title">
+    <h2 id="s1-title"><span class="num">1</span>데이터 넣기</h2>
+    <p class="hint">CSV 파일을 고르거나, 논문에서 쓴 CIC-MalMem-2022의 축소본(3,000행)으로 바로 해 보세요. 파일은 이 브라우저 안에서만 계산하고 어디로도 보내지 않습니다.</p>
+    <div class="row">
+      <button id="btn-example" type="button" class="primary">예시 데이터로 해 보기</button>
+      <label class="file">
+        <input id="file" type="file" accept=".csv,.tsv,.txt,text/csv">
+        <span>내 CSV 고르기</span>
+      </label>
+    </div>
+    <div id="load-msg" class="msg" role="status" aria-live="polite"></div>
+
+    <div id="label-box" class="hidden">
+      <div class="grid2">
+        <label>라벨 열
+          <select id="label-col"></select>
+        </label>
+        <label>악성 값
+          <select id="pos-val"></select>
+        </label>
+      </div>
+      <p class="hint small">라벨 열의 값 가운데 "악성"에 해당하는 값을 고르면, 나머지 값은 모두 정상으로 봅니다.</p>
+      <button id="btn-run" type="button" class="primary">점검 시작</button>
+    </div>
+  </section>
+
+  <!-- 2단계 -->
+  <section class="card hidden" id="step2" aria-labelledby="s2-title">
+    <h2 id="s2-title"><span class="num">2</span>지름길 특징 확인</h2>
+    <div id="verdict" class="verdict"></div>
+    <p class="hint">특징마다 <b>그 특징 하나와 기준값 하나</b>(깊이 1 결정트리)로 라벨을 맞혀 봤습니다. 70%로 기준값을 정하고 나머지 30%에서 정확도를 쟀습니다. 다수 클래스 기준선은 전부 많은 쪽으로 찍었을 때의 정확도입니다.</p>
+    <div class="table-wrap">
+      <table id="feat-table">
+        <thead><tr><th>순위</th><th>특징</th><th>정확도</th><th>기준선 대비</th><th>규칙</th><th>판정</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <button id="btn-more" type="button" class="ghost hidden">전체 특징 보기</button>
+    <div class="ref">
+      <p><b>논문의 두 기준점</b></p>
+      <p>CIC-MalMem-2022: 서비스 수 하나로 99.65% → 거의 완전 분리. 정상 덤프는 대부분 395개, 악성은 대부분 389개였습니다. 예시 데이터는 3,000행 축소본이라 수치가 조금 다르게 나올 수 있습니다. 전체 58,596행을 넣으면 이 앱에서도 99.68%가 나옵니다(논문과는 학습·시험 분할이 달라 0.03%p 차이).</p>
+      <p>DMBD 2025: 같은 점검에서 76.33%(기준선 대비 +15.33%p)로 통과했지만, 입력에 없는 수집 연도가 라벨과 얽혀 있었습니다. 그래서 3단계가 필요합니다.</p>
+    </div>
+  </section>
+
+  <!-- 3단계 -->
+  <section class="card hidden" id="step3" aria-labelledby="s3-title">
+    <h2 id="s3-title"><span class="num">3</span>메타데이터 확인 · 결과 저장</h2>
+    <p class="hint">수집 연도, 수집 환경, 파일 이름처럼 <b>모델 입력은 아니지만 데이터에 붙어 있는 열</b>을 고르면, 그 열 하나만으로 라벨을 얼마나 구분하는지(ROC-AUC)를 계산합니다. 0.5는 전혀 구분 못 함, 1.0은 완전히 구분함입니다.</p>
+    <div class="row">
+      <label class="grow">메타데이터 열
+        <select id="meta-col"></select>
+      </label>
+      <button id="btn-meta" type="button" class="primary">확인</button>
+    </div>
+    <div id="meta-result" class="meta-result" role="status" aria-live="polite"></div>
+    <p class="hint small">논문 기준점: DMBD 2025는 수집 연도 하나로 ROC-AUC 0.907이었고, 이 교란이 탐지 성능에 보탠 크기는 약 0.03 MCC로 추정되었습니다.</p>
+
+    <div class="save">
+      <button id="btn-save" type="button" class="primary">점검 결과 내려받기 (.md)</button>
+      <button id="btn-save-csv" type="button" class="ghost">특징별 결과 (.csv)</button>
+    </div>
+    <p class="limit"><b>이 점검의 한계</b> — 통과했다고 데이터셋이 타당하다는 뜻은 아닙니다. 논문에서도 DMBD 2025는 1단계 점검을 통과했지만, 입력에 없는 수집 연도의 교란은 이 점검으로 잡을 수 없었습니다. 지름길이 보이면 원인이 악성 행위인지, 수집 환경의 차이인지 먼저 따져 보세요.</p>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p>예시 데이터: CIC-MalMem-2022 (Canadian Institute for Cybersecurity, <a href="https://www.unb.ca/cic/datasets/malmem-2022.html" target="_blank" rel="noopener">공식 페이지</a>)에서 정상·악성 1,500행씩 뽑은 축소본. 계산은 모두 브라우저 안에서 이뤄집니다.</p>
+  <p>만든 사람: 이도형 · <a href="https://nb02079-ai.github.io/portfolio/">자기소개 사이트</a></p>
+</footer>
+
+<script src="example-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

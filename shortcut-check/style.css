@@ -1,0 +1,105 @@
+:root{
+  --bg:#f7f5f0; --surface:#ffffff; --ink:#1d1d1b; --muted:#5f5e58; --line:#e2ded4;
+  --accent:#2f5d50; --accent-soft:#e3ece8;
+  --danger:#b4412a; --danger-soft:#f7e4dd; --warn:#9a6b10; --warn-soft:#f6ecd4; --ok:#3f7a5d; --ok-soft:#e1efe7;
+  --serif:"Noto Serif KR",serif;
+  --sans:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#151614; --surface:#1d1f1c; --ink:#ecebe6; --muted:#a6a59d; --line:#33352f;
+    --accent:#8cc2ad; --accent-soft:#233029;
+    --danger:#f08f73; --danger-soft:#3a2420; --warn:#e2b45c; --warn-soft:#352c19; --ok:#8cc2ad; --ok-soft:#1f2f27;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.75;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+.hidden{display:none !important}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* 첫 화면 */
+.top{padding:48px 0 28px}
+.kicker{font-size:13px;letter-spacing:.08em;color:var(--muted);margin:0 0 10px}
+h1{font-family:var(--serif);font-size:clamp(28px,5.4vw,42px);line-height:1.25;margin:0 0 16px}
+.helps{font-size:clamp(16px,2.4vw,18px);margin:0 0 22px;max-width:44em}
+.helps strong{font-weight:700}
+.paper{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px;margin:0 0 22px}
+.paper-label{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.06em;margin:0 0 2px}
+.paper-title{font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.5;margin:0 0 8px}
+.paper-finding{font-size:14px;color:var(--muted);margin:0 0 6px}
+.paper-finding b{color:var(--ink)}
+.paper-links{font-size:14px;margin:0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;list-style:none;margin:0;padding:0}
+.steps li{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;line-height:1.4}
+.steps b{display:inline-grid;place-items:center;min-width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:13px}
+
+/* 카드 */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin:0 0 18px}
+.card h2{display:flex;align-items:center;gap:10px;font-size:20px;margin:0 0 8px}
+.num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:14px}
+.hint{color:var(--muted);font-size:15px;margin:0 0 14px}
+.hint.small{font-size:13px;margin-top:8px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+label{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
+label.grow{flex:1 1 260px}
+select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:42px}
+button,.file span{font:inherit;font-size:15px;border-radius:10px;padding:10px 16px;min-height:44px;cursor:pointer;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:600}
+button.ghost{background:transparent}
+button:disabled{opacity:.6;cursor:wait}
+button:hover:not(:disabled),.file:hover span{filter:brightness(1.05)}
+.file{position:relative;display:inline-block}
+.file input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.file span{display:inline-flex;align-items:center}
+#btn-run{margin-top:12px}
+.msg{margin:12px 0 0;font-size:14px;min-height:1px}
+.msg.ok{color:var(--ok)}
+.msg.err{color:var(--danger);background:var(--danger-soft);border-radius:8px;padding:10px 12px}
+
+/* 판정 */
+.verdict{border-radius:12px;padding:16px 18px;margin:6px 0 14px;border:1px solid var(--line)}
+.verdict.danger,.meta-item.danger{background:var(--danger-soft);border-color:var(--danger)}
+.verdict.warn,.meta-item.warn{background:var(--warn-soft);border-color:var(--warn)}
+.verdict.ok,.meta-item.ok{background:var(--ok-soft);border-color:var(--ok)}
+.v-main{font-weight:700;font-size:17px;margin:0 0 4px;line-height:1.5;overflow-wrap:anywhere}
+.verdict.danger .v-main,.meta-item.danger .v-main{color:var(--danger)}
+.verdict.warn .v-main,.meta-item.warn .v-main{color:var(--warn)}
+.v-sub{font-size:13px;color:var(--muted);margin:0 0 2px;overflow-wrap:anywhere}
+
+/* 표 */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600;background:var(--bg);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.num-cell{font-variant-numeric:tabular-nums;white-space:nowrap}
+.name-cell{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;overflow-wrap:anywhere;min-width:120px}
+.rule-cell{font-size:12px;color:var(--muted);min-width:200px;overflow-wrap:anywhere}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.tag.danger{background:var(--danger-soft);color:var(--danger)}
+.tag.warn{background:var(--warn-soft);color:var(--warn)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+#btn-more{margin-top:10px}
+.ref{margin-top:16px;padding:12px 14px;border-radius:10px;background:var(--bg);font-size:13px;color:var(--muted)}
+.ref p{margin:0 0 4px}
+.ref b{color:var(--ink)}
+
+/* 3단계 */
+.meta-result{margin:14px 0 0}
+.meta-item{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 10px}
+.save{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0}
+.limit{margin:16px 0 0;font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px}
+.limit b{color:var(--ink)}
+
+.foot{font-size:13px;color:var(--muted);padding-top:8px;padding-bottom:40px}
+.foot p{margin:0 0 4px}
+
+@media (max-width:600px){
+  .steps{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  .card{padding:18px 16px}
+  .rule-cell{min-width:160px}
+}
