@@ -76,6 +76,7 @@ th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;verti
 th{font-size:12px;color:var(--muted);font-weight:600;background:var(--bg);white-space:nowrap}
 tr:last-child td{border-bottom:0}
 .num-cell{font-variant-numeric:tabular-nums;white-space:nowrap}
+.num-cell.strong{font-weight:700}
 .name-cell{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;overflow-wrap:anywhere;min-width:120px}
 .rule-cell{font-size:12px;color:var(--muted);min-width:200px;overflow-wrap:anywhere}
 .tag{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;white-space:nowrap}

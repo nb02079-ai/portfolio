@@ -10,7 +10,7 @@
   var SEED = 42;
   var SHOW_TOP = 10;
   // 판정 기준(앱이 정한 값. 논문은 별도 기준을 정하지 않았음)
-  var LEVEL = { dangerAcc: 0.99, warnAcc: 0.90, warnGap: 0.35, metaDanger: 0.9, metaWarn: 0.7 };
+  var LEVEL = { dangerBacc: 0.99, warnBacc: 0.85, metaDanger: 0.9, metaWarn: 0.7 };
 
   var S = null; // 현재 데이터 상태
 
@@ -199,23 +199,28 @@
     pairs.sort(function (a, b) { return a[0] - b[0]; });
     var n = pairs.length, P = 0;
     for (i = 0; i < n; i++) P += pairs[i][1];
+    var N = n - P;
     if (pairs[0][0] === pairs[n - 1][0]) return { constant: true };
+    if (P === 0 || N === 0) return null;   // 값이 있는 행이 한쪽 라벨뿐이면 기준값을 정할 수 없음
+    // 기준값은 균형 정확도(악성 정답률과 정상 정답률의 평균)가 가장 높은 곳으로 정한다
     var lp = 0, lc = 0, best = -1, thr = null, leftPos = 0;
     for (i = 0; i < n - 1; i++) {
       lc++; lp += pairs[i][1];
       if (pairs[i][0] === pairs[i + 1][0]) continue;
-      var accA = (lc - lp) + (P - lp);      // 왼쪽 정상, 오른쪽 악성
-      var accB = lp + ((n - lc) - (P - lp)); // 왼쪽 악성, 오른쪽 정상
-      if (accA > best) { best = accA; thr = (pairs[i][0] + pairs[i + 1][0]) / 2; leftPos = 0; }
-      if (accB > best) { best = accB; thr = (pairs[i][0] + pairs[i + 1][0]) / 2; leftPos = 1; }
+      var ln = lc - lp;
+      var baA = ((P - lp) / P + ln / N) / 2;            // 왼쪽 정상, 오른쪽 악성
+      var baB = (lp / P + (N - ln) / N) / 2;            // 왼쪽 악성, 오른쪽 정상
+      if (baA > best) { best = baA; thr = (pairs[i][0] + pairs[i + 1][0]) / 2; leftPos = 0; }
+      if (baB > best) { best = baB; thr = (pairs[i][0] + pairs[i + 1][0]) / 2; leftPos = 1; }
     }
-    var correct = 0, missing = 0;
+    var correct = 0, missing = 0, tp = 0, tn = 0, nP = 0, nN = 0;
     for (i = 0; i < test.length; i++) {
-      var t = values[test[i]], pred;
+      var t = values[test[i]], pred, truth = y[test[i]];
       if (isNaN(t)) { pred = majority; missing++; } else pred = t <= thr ? leftPos : 1 - leftPos;
-      if (pred === y[test[i]]) correct++;
+      if (pred === truth) correct++;
+      if (truth) { nP++; if (pred) tp++; } else { nN++; if (!pred) tn++; }
     }
-    return { acc: correct / test.length, thr: thr, leftPos: leftPos, missing: missing };
+    return { acc: correct / test.length, bacc: (tp / nP + tn / nN) / 2, thr: thr, leftPos: leftPos, missing: missing };
   }
 
   function aucOf(scores, y) {
@@ -238,9 +243,9 @@
     return (sumR - nPos * (nPos + 1) / 2) / (nPos * nNeg);
   }
 
-  function levelOf(acc, gap) {
-    if (acc >= LEVEL.dangerAcc) return { key: "danger", text: "거의 완전 분리" };
-    if (acc >= LEVEL.warnAcc || gap >= LEVEL.warnGap) return { key: "warn", text: "지름길 후보" };
+  function levelOf(bacc) {
+    if (bacc >= LEVEL.dangerBacc) return { key: "danger", text: "거의 완전 분리" };
+    if (bacc >= LEVEL.warnBacc) return { key: "warn", text: "지름길 후보" };
     return { key: "ok", text: "보통" };
   }
 
@@ -250,10 +255,13 @@
     var nPos = y.reduce(function (a, b) { return a + b; }, 0);
     if (nPos === 0 || nPos === y.length) throw new Error("라벨이 한 가지 값뿐입니다. 정상과 악성이 모두 들어 있는 데이터가 필요합니다.");
     if (Math.min(nPos, y.length - nPos) < 5) throw new Error("정상 또는 악성 행이 5개 미만이라 점검할 수 없습니다.");
-    var order = shuffledIndex(y.length, SEED);
-    var cut = Math.floor(y.length * TRAIN_RATIO);
-    var train = order.slice(0, cut), test = order.slice(cut);
-    var trainPos = 0, i;
+    var order = shuffledIndex(y.length, SEED), train = [], test = [], i;
+    [1, 0].forEach(function (cls) {
+      var part = order.filter(function (k) { return y[k] === cls; });
+      var cut = Math.max(1, Math.min(part.length - 1, Math.round(part.length * TRAIN_RATIO)));
+      train = train.concat(part.slice(0, cut)); test = test.concat(part.slice(cut));
+    });
+    var trainPos = 0;
     for (i = 0; i < train.length; i++) trainPos += y[train[i]];
     var majority = trainPos * 2 >= train.length ? 1 : 0, base = 0;
     for (i = 0; i < test.length; i++) if (y[test[i]] === majority) base++;
@@ -268,9 +276,9 @@
       if (!s) return;
       if (s.constant) { skippedConst++; return; }
       var gap = s.acc - base;
-      feats.push({ name: c.name, acc: s.acc, gap: gap, thr: s.thr, leftPos: s.leftPos, missing: s.missing, level: levelOf(s.acc, gap) });
+      feats.push({ name: c.name, acc: s.acc, bacc: s.bacc, gap: gap, thr: s.thr, leftPos: s.leftPos, missing: s.missing, level: levelOf(s.bacc) });
     });
-    feats.sort(function (a, b) { return b.acc - a.acc || (a.name < b.name ? -1 : 1); });
+    feats.sort(function (a, b) { return b.bacc - a.bacc || b.acc - a.acc || (a.name < b.name ? -1 : 1); });
     S.result = { labelName: labelName, posVal: posVal, y: y, train: train, test: test, base: base, feats: feats,
                  skippedConst: skippedConst, nPos: nPos, majority: majority };
     S.metaResults = [];
@@ -299,22 +307,23 @@
     var top = r.feats[0];
     v.className = "verdict " + top.level.key;
     var main = top.level.key === "danger"
-      ? "특징 하나로 거의 완전히 갈립니다: " + top.name + " 하나로 정확도 " + pct(top.acc)
+      ? "특징 하나로 거의 완전히 갈립니다: " + top.name + " 하나로 균형 정확도 " + pct(top.bacc)
       : top.level.key === "warn"
-        ? "지름길 후보가 있습니다: " + top.name + " 하나로 정확도 " + pct(top.acc)
-        : "특징 하나로는 잘 갈리지 않습니다 (가장 높은 " + top.name + " " + pct(top.acc) + ")";
+        ? "지름길 후보가 있습니다: " + top.name + " 하나로 균형 정확도 " + pct(top.bacc)
+        : "특징 하나로는 잘 갈리지 않습니다 (가장 높은 " + top.name + " 균형 정확도 " + pct(top.bacc) + ")";
     v.appendChild(el("p", "v-main", main));
-    v.appendChild(el("p", "v-sub", "다수 클래스 기준선 " + pct(r.base) + " 대비 " + pp(top.gap) + " · 규칙: " + ruleText(top, r)));
+    v.appendChild(el("p", "v-sub", "정확도 " + pct(top.acc) + " (다수 클래스 기준선 " + pct(r.base) + " 대비 " + pp(top.gap) + ") · 규칙: " + ruleText(top, r)));
     var nD = r.feats.filter(function (f) { return f.level.key === "danger"; }).length;
     var nW = r.feats.filter(function (f) { return f.level.key === "warn"; }).length;
     v.appendChild(el("p", "v-sub", "숫자 특징 " + r.feats.length + "개 가운데 거의 완전 분리 " + nD + "개, 지름길 후보 " + nW + "개" +
       (r.skippedConst ? " · 값이 하나뿐인 특징 " + r.skippedConst + "개는 뺐습니다" : "") +
-      " · 판정 기준(앱이 정한 값): 정확도 99% 이상이면 거의 완전 분리, 90% 이상이거나 기준선보다 35%p 이상 높으면 지름길 후보"));
+      " · 판정 기준(앱이 정한 값): 균형 정확도 99% 이상이면 거의 완전 분리, 85% 이상이면 지름길 후보"));
     var list = all ? r.feats : r.feats.slice(0, SHOW_TOP);
     list.forEach(function (f, i) {
       var tr = document.createElement("tr");
       tr.appendChild(el("td", "num-cell", String(i + 1)));
       tr.appendChild(el("td", "name-cell", f.name));
+      tr.appendChild(el("td", "num-cell strong", pct(f.bacc)));
       tr.appendChild(el("td", "num-cell", pct(f.acc)));
       tr.appendChild(el("td", "num-cell", pp(f.gap)));
       tr.appendChild(el("td", "rule-cell", ruleText(f, r)));
@@ -408,14 +417,15 @@
     L.push("# 지름길 점검 결과", "");
     L.push("- 파일: " + mdCell(S.name) + " (" + S.rows.length + "행 · " + S.header.length + "열" + (S.sampled ? ", 전체 " + S.total + "행 중 표본" : "") + ")");
     L.push("- 라벨 열: " + mdCell(r.labelName) + " · 악성 값: " + mdCell(r.posVal) + " · 악성 " + r.nPos + "행 / 정상 " + (r.y.length - r.nPos) + "행");
-    L.push("- 방법: 특징 하나와 기준값 하나(깊이 1 결정트리). 고정 시드 " + SEED + "로 섞어 70%에서 기준값을 정하고 30%(" + r.test.length + "행)에서 정확도 측정");
-    L.push("- 다수 클래스 기준선: " + pct(r.base), "");
+    L.push("- 방법: 특징 하나와 기준값 하나(깊이 1 결정트리). 고정 시드 " + SEED + "로 섞고 정상·악성을 각각 70:30으로 나눠, 70%에서 균형 정확도가 가장 높은 기준값을 정하고 30%(" + r.test.length + "행)에서 측정");
+    L.push("- 균형 정확도 = (악성 정답률 + 정상 정답률) ÷ 2. 찍기만 하면 50%라서 정상·악성 비율이 기울어도 비교할 수 있습니다.");
+    L.push("- 다수 클래스 기준선(정확도): " + pct(r.base), "");
     L.push("## 특징별 결과 (상위 " + Math.min(SHOW_TOP, r.feats.length) + "개)", "");
-    L.push("| 순위 | 특징 | 정확도 | 기준선 대비 | 규칙 | 판정 |", "| --- | --- | --- | --- | --- | --- |");
+    L.push("| 순위 | 특징 | 균형 정확도 | 정확도 | 기준선 대비 | 규칙 | 판정 |", "| --- | --- | --- | --- | --- | --- | --- |");
     r.feats.slice(0, SHOW_TOP).forEach(function (f, i) {
-      L.push("| " + (i + 1) + " | " + mdCell(f.name) + " | " + pct(f.acc) + " | " + pp(f.gap) + " | " + mdCell(ruleText(f, r)) + " | " + f.level.text + " |");
+      L.push("| " + (i + 1) + " | " + mdCell(f.name) + " | " + pct(f.bacc) + " | " + pct(f.acc) + " | " + pp(f.gap) + " | " + mdCell(ruleText(f, r)) + " | " + f.level.text + " |");
     });
-    if (!r.feats.length) L.push("| - | 숫자 특징 없음 | | | | |");
+    if (!r.feats.length) L.push("| - | 숫자 특징 없음 | | | | | |");
     L.push("", "## 메타데이터 결과", "");
     if (!S.metaResults.length) L.push("확인한 메타데이터 열이 없습니다.");
     else {
@@ -425,15 +435,15 @@
     L.push("", "## 바탕 논문과 한계", "");
     L.push("- 논문: 높은 탐지 성능은 무엇을 측정하는가 — 호스트 행위 기반 악성코드 탐지 평가의 네 층위 분석");
     L.push("- 기준점: CIC-MalMem-2022는 서비스 수 하나로 정확도 99.65%. DMBD 2025는 같은 점검을 통과(76.33%)했지만 수집 연도 하나로 ROC-AUC 0.907.");
-    L.push("- 판정 기준(정확도 99%·90%, 기준선 대비 35%p, AUC 0.9·0.7)은 이 앱이 정한 값입니다.");
+    L.push("- 판정 기준(균형 정확도 99%·85%, AUC 0.9·0.7)은 이 앱이 정한 값입니다.");
     L.push("- 이 점검을 통과해도 데이터셋이 타당하다는 뜻은 아닙니다. 입력에 없는 교란은 이 점검으로 잡을 수 없습니다.");
     return L.join("\n") + "\n";
   }
 
   function reportCsv() {
     var r = S.result, q = function (s) { s = String(s); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
-    var L = ["rank,feature,accuracy,gap_vs_baseline,threshold,left_is_malware,level"];
-    r.feats.forEach(function (f, i) { L.push([i + 1, q(f.name), f.acc.toFixed(6), f.gap.toFixed(6), f.thr, f.leftPos, q(f.level.text)].join(",")); });
+    var L = ["rank,feature,balanced_accuracy,accuracy,gap_vs_baseline,threshold,left_is_malware,level"];
+    r.feats.forEach(function (f, i) { L.push([i + 1, q(f.name), f.bacc.toFixed(6), f.acc.toFixed(6), f.gap.toFixed(6), f.thr, f.leftPos, q(f.level.text)].join(",")); });
     return "﻿" + L.join("\n") + "\n";
   }
 

@@ -62,17 +62,17 @@
   <section class="card hidden" id="step2" aria-labelledby="s2-title">
     <h2 id="s2-title"><span class="num">2</span>지름길 특징 확인</h2>
     <div id="verdict" class="verdict"></div>
-    <p class="hint">특징마다 <b>그 특징 하나와 기준값 하나</b>(깊이 1 결정트리)로 라벨을 맞혀 봤습니다. 70%로 기준값을 정하고 나머지 30%에서 정확도를 쟀습니다. 다수 클래스 기준선은 전부 많은 쪽으로 찍었을 때의 정확도입니다.</p>
+    <p class="hint">특징마다 <b>그 특징 하나와 기준값 하나</b>(깊이 1 결정트리)로 라벨을 맞혀 봤습니다. 정상·악성을 각각 70:30으로 나눠, 70%로 기준값을 정하고 나머지 30%에서 쟀습니다. <b>균형 정확도</b>는 악성 정답률과 정상 정답률의 평균이라 찍기만 하면 50%입니다. 정상·악성 비율이 기울어진 데이터에서도 정확도처럼 부풀지 않아서, 판정은 이 값으로 합니다. 다수 클래스 기준선은 전부 많은 쪽으로 찍었을 때의 정확도입니다.</p>
     <div class="table-wrap">
       <table id="feat-table">
-        <thead><tr><th>순위</th><th>특징</th><th>정확도</th><th>기준선 대비</th><th>규칙</th><th>판정</th></tr></thead>
+        <thead><tr><th>순위</th><th>특징</th><th>균형 정확도</th><th>정확도</th><th>기준선 대비</th><th>규칙</th><th>판정</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
     <button id="btn-more" type="button" class="ghost hidden">전체 특징 보기</button>
     <div class="ref">
       <p><b>논문의 두 기준점</b></p>
-      <p>CIC-MalMem-2022: 서비스 수 하나로 99.65% → 거의 완전 분리. 정상 덤프는 대부분 395개, 악성은 대부분 389개였습니다. 예시 데이터는 3,000행 축소본이라 수치가 조금 다르게 나올 수 있습니다. 전체 58,596행을 넣으면 이 앱에서도 99.68%가 나옵니다(논문과는 학습·시험 분할이 달라 0.03%p 차이).</p>
+      <p>CIC-MalMem-2022: 서비스 수 하나로 99.65% → 거의 완전 분리. 정상 덤프는 대부분 395개, 악성은 대부분 389개였습니다. 예시 데이터는 3,000행 축소본이라 수치가 조금 다르게 나올 수 있습니다. 전체 58,596행을 넣으면 이 앱에서도 99.68%가 나옵니다(정상·악성이 반반이라 정확도와 균형 정확도가 같은 수준이고, 논문과는 학습·시험 분할이 달라 0.03%p 차이).</p>
       <p>DMBD 2025: 같은 점검에서 76.33%(기준선 대비 +15.33%p)로 통과했지만, 입력에 없는 수집 연도가 라벨과 얽혀 있었습니다. 그래서 3단계가 필요합니다.</p>
     </div>
   </section>
@@ -100,6 +100,7 @@
 
 <footer class="wrap foot">
   <p>예시 데이터: CIC-MalMem-2022 (Canadian Institute for Cybersecurity, <a href="https://www.unb.ca/cic/datasets/malmem-2022.html" target="_blank" rel="noopener">공식 페이지</a>)에서 정상·악성 1,500행씩 뽑은 축소본. 계산은 모두 브라우저 안에서 이뤄집니다.</p>
+  <p>악성코드가 아니어도 정답 열이 있는 다른 분류 데이터(침입 탐지, 스팸·피싱, 부정 결제 등)에 그대로 쓸 수 있습니다. 이때 "악성 값"에는 찾으려는 쪽(공격, 스팸, 부정 등)을 고르면 됩니다.</p>
   <p>만든 사람: 이도형 · <a href="https://nb02079-ai.github.io/portfolio/">자기소개 사이트</a></p>
 </footer>
 
