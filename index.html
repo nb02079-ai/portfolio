@@ -18,16 +18,16 @@
 ========================== -->
 <header class="hero" id="home">
   <div class="wrap">
-    <p class="kicker">기계공학 · AI · 네트워크 보안</p>
+    <p class="kicker">모의해킹 · 네트워크 보안 · AI</p>
     <h1>이도형</h1>
     <p class="tagline"><em>2019년 "왜 공부하는가"에 답하지 못해 멈췄다가</em>, 궁금한 쪽으로 움직이는 법을 찾아 다시 배우고 있는 사람</p>
     <ul class="doors" aria-label="바로가기">
       <li><a href="#story"><b>이야기</b><span>멈춤에서 지금까지</span></a></li>
       <li><a href="#numbers"><b>숫자</b><span>기록으로 본 나</span></a></li>
-      <li><a href="#works"><b>대표작</b><span>논문 · 앱</span></a></li>
-      <li><a href="#resume"><b>이력서</b><span>문서 보기</span></a></li>
+      <li><a href="#works"><b>대표작</b><span>방어전 · 논문 · 보안툴</span></a></li>
+      <li><a href="#resume"><b>이력서</b><span>학력 · 교육</span></a></li>
     </ul>
-    <p class="contact">연락: <a href="mailto:nb02079@gmail.com">nb02079@gmail.com</a></p>
+    <p class="contact">연락: <a href="mailto:nb02079@gmail.com">nb02079@gmail.com</a> · GitHub: <a href="https://github.com/nb02079-ai" target="_blank" rel="noopener noreferrer">github.com/nb02079-ai</a></p>
   </div>
 </header>
 
@@ -72,6 +72,7 @@
   <div class="wrap">
     <p class="label">숫자</p>
     <h2 id="numbers-title">기록으로 본 나</h2>
+    <p class="numbers-intro">아래 숫자는 보안·AI 교육 과정에서 매일 남긴 출석·과제·회고 기록을 그대로 집계한 것입니다. 스펙 대신, 꾸준함과 흐트러진 날을 되돌린 과정을 숫자로 보여 드립니다.</p>
     <!-- refresh:numbers:start (refresh.py가 만드는 구간, 직접 고치지 마세요) -->
     <p class="pair"><span class="pair-then">2019년, 이유를 찾지 못한 한 학기는 학사경고로 끝났습니다.</span> <span class="pair-now">2026년 과정에서는 훈련일 40일 동안 결석 0일입니다.</span> <small>출처: 내 출석 기록 (2026-10-12 기준)</small></p>
     <h3 class="sub">과제지속력</h3>
@@ -139,6 +140,15 @@
     <p class="label">대표작</p>
     <h2 id="works-title">직접 만든 것</h2>
     <div class="works">
+      <article class="work featured">
+        <div class="tag">방어전 · 2026 · SKT ALEPH</div>
+        <h3>최부장의 비밀창고 — 제로 트러스트 접근통제와 XDR 탐지 직접 구축</h3>
+        <p>단계별 방어 과제에서, 공개 파일로 노출돼 있던 자료를 서버 뒤로 옮기고 <b>토큰 검증 · 소유자 확인(RLS) · 등록 기기 전용 · 구역/경로 최소화 · 이상 접속 재확인(step-up)</b>으로 제로 트러스트 접근통제를 쌓았습니다. 여기에 <b>무차별 로그인 · 웹 주입 · 알려진 취약점(Log4j) · 지속성 · 권한 상승 · 데이터 유출</b> 6종을 <b>MITRE ATT&amp;CK</b> 기법에 매핑한 XDR 탐지 모듈을 직접 구현해 경보를 차단/알림/기록으로 분류했습니다(정상 이벤트 오탐 차단 0건). 2~22단계와 보너스 6개 완료, Vercel 배포.</p>
+        <div class="links">
+          <a href="https://github.com/nb02079-ai/choi-bujang-vault" target="_blank" rel="noopener noreferrer">저장소 →</a>
+          <a href="https://choi-bujang-vault-nb02079-ai.vercel.app" target="_blank" rel="noopener noreferrer">라이브 데모 →</a>
+        </div>
+      </article>
       <article class="work">
         <div class="tag">논문 · 2026</div>
         <h3>높은 탐지 성능은 무엇을 측정하는가 — 호스트 행위 기반 악성코드 탐지 평가의 네 층위 분석</h3>
@@ -159,7 +169,63 @@
       </article>
     </div>
 
-    <h3 class="sub" id="projects-title">기계공학 프로젝트</h3>
+    <h3 class="sub">직접 만든 보안 툴</h3>
+    <div class="works">
+      <article class="work">
+        <div class="tag">보안 툴 · <span class="status wip">진행 중</span></div>
+        <h3>KISA 기준 시스템 점검 스크립트</h3>
+        <p>Rocky Linux 서버가 KISA 보안 기준을 지키는지 자동으로 점검하는 셸 스크립트입니다. 현재 계정 관리 항목(U-01~U-13)을 구현했고, sudo 와일드카드 등 권한 상승 탐지 항목으로 확장하고 있습니다.</p>
+        <div class="links"><span class="soon">저장소 준비 중</span></div>
+      </article>
+      <article class="work">
+        <div class="tag">보안 툴 · <span class="status done">완료</span></div>
+        <h3>침해 흔적 진단 도구 — LinTrace</h3>
+        <p>KISA 해킹진단도구처럼 리눅스에 남은 침해 흔적을 찾는 도구입니다. 탐색 대상은 좁히고 점검 목록은 늘리는 방향으로 차별화했고, 공개 VM으로 결과를 검증했습니다.</p>
+        <div class="links"><span class="soon">저장소 준비 중</span></div>
+      </article>
+      <article class="work">
+        <div class="tag">보안 툴 · <span class="status done">완료</span></div>
+        <h3>미니 SIEM — 통합 로그·모니터링 웹</h3>
+        <p>여러 VM의 보안·모니터링 정보를 한 화면에서 보는 SIEM형 웹입니다. 에이전트를 등록하면 Zabbix·OSSEC·Snort의 대표 기능을 골라 통합해 보여주며, Wazuh 대시보드를 참고해 직접 구현했습니다.</p>
+        <div class="links"><span class="soon">저장소 준비 중</span></div>
+      </article>
+      <article class="work">
+        <div class="tag">네트워크 · <span class="status done">완료</span></div>
+        <h3>ASAv + pfSense 이중 방화벽 시뮬레이션</h3>
+        <p>GNS3에서 Cisco ASAv와 pfSense를 겹친 이중 방화벽 토폴로지를 구성하고 방화벽 정책을 설계·검증했습니다.</p>
+        <div class="links"><span class="soon">저장소 준비 중</span></div>
+      </article>
+      <article class="work">
+        <div class="tag">네트워크 · <span class="status done">완료</span></div>
+        <h3>Full-Security Labs</h3>
+        <p>GNS3로 ASAv·pfSense·IDS/IPS와 외부 공격 VLAN까지 포함한 종합 보안 실습망을 구성하고 결과보고서로 정리했습니다.</p>
+        <div class="links"><span class="soon">저장소 준비 중</span></div>
+      </article>
+    </div>
+
+    <h3 class="sub">공격 · 방어 실습</h3>
+    <div class="works">
+      <article class="work">
+        <div class="tag">웹 해킹 · <span class="status done">완료</span></div>
+        <h3>OWASP Juice Shop 챌린지</h3>
+        <p>Kali Linux 환경에서 OWASP Juice Shop의 난이도별 웹 취약점 챌린지를 풀며 공격 기법을 익혔습니다.</p>
+        <div class="links"><span class="soon">기록 준비 중</span></div>
+      </article>
+      <article class="work">
+        <div class="tag">CTF 공략 · <span class="status done">완료</span></div>
+        <h3>LAMP / CMSMS 타겟 침투</h3>
+        <p>LAMP·CMS Made Simple 타겟을 정찰부터 시작해 SQLi 또는 크리덴셜 공격으로 리버스 셸까지 잇는 침투 경로를 수행했습니다.</p>
+        <div class="links"><span class="soon">기록 준비 중</span></div>
+      </article>
+      <article class="work">
+        <div class="tag">CTF 제작 · <span class="status done">완료</span></div>
+        <h3>CTF 머신 제작 — Mang Go</h3>
+        <p>직접 취약점을 심은 VirtualBox CTF 머신입니다. 웹(SQLi) → 포렌식 → 권한 상승으로 이어지는 공격 체인을 설계하고 검증했습니다.</p>
+        <div class="links"><span class="soon">배포 준비 중</span></div>
+      </article>
+    </div>
+
+    <h3 class="sub" id="projects-title">기계공학 프로젝트 <small class="sub-note">— 공학자로서의 뿌리</small></h3>
     <div class="projects">
       <article class="project">
         <h4>배터리 냉각 시스템 최적화</h4>
@@ -194,15 +260,44 @@
     </div>
 
     <h3 class="sub" id="skills-title">다뤄 본 도구</h3>
-    <ul class="skills" aria-labelledby="skills-title">
-      <li>ANSYS Workbench</li>
-      <li>ANSYS Fluent</li>
-      <li>MATLAB</li>
-      <li>Mechanical Design</li>
-      <li>CFD / Simulation</li>
-      <li>Data Analysis</li>
-      <li>Machine Learning</li>
-    </ul>
+    <div class="skillgroups" aria-labelledby="skills-title">
+      <div class="skillgroup">
+        <h4>보안 · 네트워크</h4>
+        <ul class="skills">
+          <li>GNS3</li>
+          <li>Cisco ASAv</li>
+          <li>pfSense</li>
+          <li>Snort (IDS/IPS)</li>
+          <li>Wazuh</li>
+          <li>Kali Linux</li>
+          <li>OWASP</li>
+          <li>MITRE ATT&amp;CK</li>
+          <li>Rocky Linux / Bash</li>
+          <li>VirtualBox</li>
+        </ul>
+      </div>
+      <div class="skillgroup">
+        <h4>AI · 개발</h4>
+        <ul class="skills">
+          <li>Python</li>
+          <li>Machine Learning</li>
+          <li>Data Analysis</li>
+          <li>Supabase</li>
+          <li>Vercel</li>
+          <li>Git / GitHub</li>
+        </ul>
+      </div>
+      <div class="skillgroup">
+        <h4>기계공학</h4>
+        <ul class="skills">
+          <li>ANSYS Workbench</li>
+          <li>ANSYS Fluent</li>
+          <li>MATLAB</li>
+          <li>OpenFOAM</li>
+          <li>CFD / Simulation</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -212,8 +307,14 @@
 <section id="resume" aria-labelledby="resume-title">
   <div class="wrap">
     <p class="label">이력서</p>
-    <h2 id="resume-title">문서</h2>
-    <div class="pending">이력서 · 자기소개서 · 경력기술서 파일이 연결될 자리입니다.</div>
+    <h2 id="resume-title">이력 요약</h2>
+    <dl class="resume">
+      <div class="resume-row"><dt>지원 직무</dt><dd>모의해킹 (침투 테스트)</dd></div>
+      <div class="resume-row"><dt>학력</dt><dd>연세대학교 기계공학과 · 2018 입학 – 2026.02 졸업</dd></div>
+      <div class="resume-row"><dt>교육</dt><dd>SKT ALEPH 보안 교육 (국가 지원 과정) · 수료 예정</dd></div>
+      <div class="resume-row"><dt>자격증</dt><dd>없음</dd></div>
+    </dl>
+    <p class="resume-note">이력서 · 자기소개서 · 경력기술서 상세 문서는 곧 이 자리에 연결됩니다.</p>
   </div>
 </section>
 
