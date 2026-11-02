@@ -26,7 +26,7 @@ a{color:inherit}
 .hero h1{font-family:var(--serif);font-size:clamp(40px,8vw,64px);line-height:1.15;margin:0 0 22px;font-weight:700}
 .hero .tagline{font-size:clamp(19px,3.2vw,23px);line-height:1.6;margin:0 0 40px;max-width:30em}
 .hero .tagline em{font-style:normal;background:linear-gradient(transparent 62%,var(--accent-soft) 62%)}
-.doors{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0;padding:0;list-style:none}
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px;margin:0;padding:0;list-style:none}
 .doors a{display:block;text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:14px 14px 12px;transition:border-color .15s,transform .15s}
 .doors a:hover,.doors a:focus-visible{border-color:var(--accent);transform:translateY(-2px)}
 .doors b{display:block;font-size:16px}
@@ -109,6 +109,9 @@ blockquote cite{display:block;font-style:normal;font-size:13px;margin-top:4px}
 .resume dd{margin:0;font-size:15px}
 .resume-note{margin:14px 0 0;font-size:13px;color:var(--muted)}
 @media (max-width:560px){.resume-row{grid-template-columns:1fr;gap:2px}}
+.study-intro{color:var(--muted);font-size:15px;line-height:1.7;margin:0 0 18px}
+.study-links{margin-top:20px;display:flex;gap:16px;flex-wrap:wrap}
+.study-links a{font-size:14px;color:var(--accent);text-underline-offset:3px}
 
 footer{padding:40px 0 56px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
 
