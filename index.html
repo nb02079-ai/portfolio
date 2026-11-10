@@ -66,9 +66,21 @@
         </div>
       </div>
       <div class="panel">
-        <div class="panel-top"><span class="panel-eye">ZTNA · XDR</span><span class="panel-dot"></span></div>
-        <div class="panel-big">오탐 0</div>
-        <div class="panel-cap">1,960개 요청 조합 · 탐지 모듈 6개<br>2~22단계 통과 · Vercel 배포</div>
+        <div class="panel-top"><span class="panel-eye">XDR 탐지 분류 · 경보 158건</span><span class="panel-dot"></span></div>
+        <div class="panel-body">
+          <table class="ptable">
+            <thead><tr><th>탐지 모듈</th><th>차단</th><th>알림</th><th>기록</th></tr></thead>
+            <tbody>
+              <tr><td>무차별 로그인</td><td>10</td><td>9</td><td>9</td></tr>
+              <tr><td>웹 주입</td><td>8</td><td>9</td><td>9</td></tr>
+              <tr><td>Log4j</td><td>8</td><td>8</td><td>8</td></tr>
+              <tr><td>지속성</td><td>8</td><td>8</td><td>8</td></tr>
+              <tr><td>권한 상승</td><td>9</td><td>8</td><td>9</td></tr>
+              <tr><td>데이터 유출</td><td>10</td><td>10</td><td>10</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel-foot">정상 이벤트 오탐 차단 <span style="color:var(--panel-ink)">0</span> · 접근통제 <span style="color:var(--panel-ink)">1,960</span>개 조합 통과</div>
       </div>
     </article>
 
@@ -87,9 +99,14 @@
         </div>
       </div>
       <div class="panel">
-        <div class="panel-top"><span class="panel-eye">CIC-MalMem-2022</span><span class="panel-dot"></span></div>
-        <div class="panel-big">99.65%</div>
-        <div class="panel-cap">서비스 수 1개만으로 도달한 정확도<br>— 지표가 정말 측정하는 것</div>
+        <div class="panel-top"><span class="panel-eye">CIC-MalMem-2022 · 정확도</span><span class="panel-dot"></span></div>
+        <div class="panel-body">
+          <div class="pbars">
+            <div class="pbar"><span class="pbar-l">특징 1개<br>(서비스 수)</span><span class="pbar-track"><span class="pbar-fill" style="width:99.65%"></span></span><span class="pbar-v">99.65%</span></div>
+            <div class="pbar"><span class="pbar-l">무작위<br>기준선</span><span class="pbar-track"><span class="pbar-fill" style="width:50%"></span></span><span class="pbar-v">50.0%</span></div>
+          </div>
+        </div>
+        <div class="panel-foot">벤치마크 · 모델 · 개선 · 해석 — 지표가 정말 측정하는 것을 네 층위로 분해</div>
       </div>
     </article>
 
@@ -108,9 +125,15 @@
         </div>
       </div>
       <div class="panel">
-        <div class="panel-top"><span class="panel-eye">Dataset Shortcut Check</span><span class="panel-dot"></span></div>
-        <div class="panel-big">1개 &rarr; ?</div>
-        <div class="panel-cap">특징 하나로 라벨이 갈리는지<br>브라우저에서 바로 계산 · 논문 4.1 반영</div>
+        <div class="panel-top"><span class="panel-eye">특징별 지름길 위험도</span><span class="panel-dot"></span></div>
+        <div class="panel-body">
+          <div class="pbars">
+            <div class="pbar"><span class="pbar-l">서비스 수</span><span class="pbar-track"><span class="pbar-fill" style="width:99.65%"></span></span><span class="pbar-v">99.65%</span></div>
+            <div class="pbar ghost"><span class="pbar-l">특징 B</span><span class="pbar-track"><span class="pbar-fill" style="width:60%"></span></span><span class="pbar-v">···</span></div>
+            <div class="pbar ghost"><span class="pbar-l">특징 C</span><span class="pbar-track"><span class="pbar-fill" style="width:34%"></span></span><span class="pbar-v">···</span></div>
+          </div>
+        </div>
+        <div class="panel-foot">업로드한 CSV의 특징마다 라벨 분리 정확도를 계산해 순위로 보여줍니다 (맨 위는 논문 예시)</div>
       </div>
     </article>
 
@@ -130,9 +153,19 @@
         </div>
       </div>
       <div class="panel">
-        <div class="panel-top"><span class="panel-eye">Linux Intrusion Trace</span><span class="panel-dot"></span></div>
-        <div class="panel-big">8/8</div>
-        <div class="panel-cap">권한 상승 경로 탐지 · 오탐 0<br>54개 항목 · 자동화 테스트 290개</div>
+        <div class="panel-top"><span class="panel-eye">Linux Intrusion Trace · 실증</span><span class="panel-dot"></span></div>
+        <div class="panel-body">
+          <table class="ptable kv">
+            <tbody>
+              <tr><td>점검 영역</td><td>6 영역 · 항목 54</td></tr>
+              <tr><td>권한 상승 경로</td><td><span class="hot">8 / 8</span> 탐지</td></tr>
+              <tr><td>정상 서버 오탐</td><td><span class="hot">0</span></td></tr>
+              <tr><td>침해 사슬</td><td>11단계 전수 탐지</td></tr>
+              <tr><td>자동화 테스트</td><td>290</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel-foot">계정 · 프로세스 · 네트워크 · 지속성 · 파일 · 로그 → MITRE ATT&amp;CK 매핑</div>
       </div>
     </article>
   </div>
