@@ -178,11 +178,15 @@
         <p>Rocky Linux 서버가 KISA 보안 기준을 지키는지 자동으로 점검하는 셸 스크립트입니다. 현재 계정 관리 항목(U-01~U-13)을 구현했고, sudo 와일드카드 등 권한 상승 탐지 항목으로 확장하고 있습니다.</p>
         <div class="links"><span class="soon">저장소 준비 중</span></div>
       </article>
-      <article class="work">
-        <div class="tag">보안 툴 · <span class="status done">완료</span></div>
+      <article class="work featured">
+        <div class="tag">보안 툴 · <span class="status done">완료</span> · 공격 → 탐지 실증</div>
         <h3>침해 흔적 진단 도구 — LinTrace</h3>
-        <p>KISA 해킹진단도구처럼 리눅스에 남은 침해 흔적을 찾는 도구입니다. 탐색 대상은 좁히고 점검 목록은 늘리는 방향으로 차별화했고, 공개 VM으로 결과를 검증했습니다.</p>
-        <div class="links"><span class="soon">저장소 준비 중</span></div>
+        <p>KISA 해킹진단도구에서 출발해 직접 만든 리눅스 서버 침해 흔적 진단 도구입니다. 루트로 한 번 실행하면 <b>읽기 전용</b>으로 계정·프로세스·네트워크·지속성·파일·로그를 훑어 <b>54개 항목</b>을 <b>MITRE ATT&amp;CK</b>에 매핑해 점검하고, 심각/위험/정상을 근거와 함께 판정합니다. <b>기준선 비교·사건 타임라인·증거 아카이브</b>(지워진 로그 복구)와 외부 자원 없는 단일 HTML 리포트를 갖췄습니다. 공개 실습 VM 2종에서 심어진 권한 상승 경로 <b>8/8</b> 탐지·오탐 0, 자동화 테스트 290개. <b>깨끗한 웹서버에 직접 심은 11단계 침해 사슬을 전수 탐지</b>한 실증 기록을 데모로 정리했습니다.</p>
+        <div class="links">
+          <a href="lintrace/">공격 → 탐지 데모 →</a>
+          <a href="lintrace/report.html">실제 진단 리포트 →</a>
+          <a href="https://github.com/nb02079-ai/lintrace" target="_blank" rel="noopener noreferrer">저장소 →</a>
+        </div>
       </article>
       <article class="work">
         <div class="tag">보안 툴 · <span class="status done">완료</span></div>

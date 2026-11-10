@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LinTrace — 침해 흔적 진단 도구 (공격 → 탐지 실증)</title>
+<meta name="description" content="직접 만든 리눅스 침해 흔적 진단 도구 LinTrace. 깨끗한 웹서버에 직접 공격을 심고 11단계 침해 사슬을 전부 탐지한 실증 기록.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="back" href="../#works">← 이도형 포트폴리오</a>
+    <p class="kicker">보안 툴 · 원클릭 침해 흔적 진단</p>
+    <h1>LinTrace — 공격을 심고, 전부 잡다</h1>
+    <p class="lead">KISA 해킹진단도구에서 출발해 직접 만든 리눅스 서버 침해 흔적 진단 도구입니다. 루트 권한으로 한 번 실행하면 <strong>읽기 전용</strong>으로 계정·프로세스·네트워크·지속성·파일·로그를 훑어 <strong>54개 항목</strong>을 점검하고, 심각/위험/정상을 근거와 함께 판정합니다. 아래는 깨끗한 Ubuntu 24.04 웹서버에 <strong>직접 공격을 심고</strong> LinTrace로 탐지한 실증 기록입니다.</p>
+    <div class="resultbar">
+      <span class="pill crit">전체 판정: 심각</span>
+      <span class="pill">탐지 19건 (심각 8 · 위험 7 · 참고 4)</span>
+      <span class="pill">심은 공격 11단계 전수 탐지</span>
+      <span class="pill">오탐 0 · 점검 불가 0</span>
+      <span class="pill">진단 18초</span>
+    </div>
+    <div class="cta">
+      <a class="primary" href="report.html">실제 진단 리포트 원본 보기 →</a>
+      <a href="https://github.com/nb02079-ai/lintrace" target="_blank" rel="noopener">소스 저장소 →</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <h2>도구 한눈에</h2>
+  <p class="sub">침해가 의심되는 서버에서 "무슨 일이 있었나"를 빠르게 좁히는 라이브 대응(Live-response) 도구.</p>
+  <ul class="tight">
+    <li><strong>54개 점검 항목</strong> — 계정(ACC)·지속성(PER)·프로세스(PRC)·네트워크(NET)·파일(FS)·명령 기록(CMD)·로그(LOG), MITRE ATT&amp;CK 매핑</li>
+    <li><strong>읽기 전용 · 파이썬 표준 라이브러리만</strong> — 점검 대상을 바꾸지 않고, Python 3.6까지 호환(구형 서버에서도 동작)</li>
+    <li><strong>근거 중심 판정</strong> — 모든 탐지에 이유·근거(로그 줄·파일 해시·프로세스)·다음 확인 단계를 함께 제시</li>
+    <li><strong>보조 기능 3종</strong> — 기준선 비교 · 사건 타임라인 · 증거 아카이브(지워진 파일 복구 포함)</li>
+    <li><strong>리포트 3형식</strong> — 텍스트 · JSON · 외부 자원 없는 단일 HTML(CSP·전부 이스케이프)</li>
+    <li><strong>검증</strong> — 공개 실습 VM 2종(lin.security 18.04, Ubuntu 24.04+WordPress)에서 심어진 권한 상승 경로 <strong>8/8</strong> 탐지, 기준선 오탐 0, 자동화 테스트 290개</li>
+  </ul>
+</section>
+
+<section>
+  <h2>실증: 11단계 침해 사슬 → 전수 탐지</h2>
+  <p class="sub">깨끗한 상태의 기준선을 먼저 저장하고, 공격자 관점의 침해 사슬을 심은 뒤 LinTrace를 한 번 실행했습니다. 심은 공격은 하나도 빠지지 않고 잡혔습니다.</p>
+  <table>
+    <tr><th>단계</th><th>공격 행위</th><th>탐지 항목</th><th>등급</th></tr>
+    <tr><td>① 초기 침투</td><td>WordPress 업로드 폴더에 웹쉘</td><td>FS-06 웹쉘 / FS-07 웹계정 소유</td><td><span class="sev c">심각</span>·참고</td></tr>
+    <tr><td>①</td><td>sqlmap·SQL 인젝션·경로 조작 요청</td><td>CMD-03 웹 로그 공격 패턴 ×3</td><td><span class="sev w">위험</span></td></tr>
+    <tr><td>② 거점</td><td>숨김 폴더 <code>/tmp/.x</code>에 도구 배치·실행</td><td>FS-01·FS-08·PRC-03·NET-01</td><td><span class="sev c">심각</span>·위험</td></tr>
+    <tr><td>②</td><td>리버스 셸 <code>bash → 127.0.0.1:4444</code></td><td>PRC-08 셸 입출력이 네트워크 소켓</td><td><span class="sev c">심각</span></td></tr>
+    <tr><td>③ 권한 상승</td><td>bash를 SUID로 복사</td><td>FS-02 SUID·셸 복사본</td><td><span class="sev c">심각</span></td></tr>
+    <tr><td>③</td><td>python에 <code>cap_setuid</code></td><td>FS-03 capability 부여</td><td><span class="sev w">위험</span></td></tr>
+    <tr><td>④ 지속성</td><td>cron 리버스 셸</td><td>PER-01 crontab 의심 명령</td><td><span class="sev c">심각</span></td></tr>
+    <tr><td>④</td><td>UID 0 백도어 계정</td><td>ACC-01 root 외 UID 0 계정</td><td><span class="sev c">심각</span></td></tr>
+    <tr><td>④</td><td>root authorized_keys에 키 추가</td><td>ACC-07 authorized_keys</td><td><span class="sev i">참고</span></td></tr>
+    <tr><td>⑤ 흔적 삭제</td><td>명령 기록을 <code>/dev/null</code>로</td><td>LOG-03 명령 기록 삭제</td><td><span class="sev w">위험</span></td></tr>
+    <tr><td>⑤</td><td>웹쉘 수정 시각을 2024년으로 위장</td><td>타임라인이 생성 시각(ctime)과 병기 — 발각</td><td>—</td></tr>
+    <tr><td>⑤</td><td>웹 접근 로그에서 공격 요청 줄 삭제</td><td>LOG-01 + 증거 아카이브로 원본 복구</td><td><span class="sev c">심각</span></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>탐지를 하나의 사건으로 엮는 보조 기능 3종</h2>
+  <div class="feat">
+    <div class="card">
+      <h3>기준선 비교</h3>
+      <p>깨끗했을 때를 저장해 두고 달라진 것만 짚습니다. 이번엔 새 포트 4444·UID 0 계정·SUID·cron 생성과 <code>/etc/passwd</code>·<code>authorized_keys</code> 변경 등 7건을 정확히 집었습니다. 재부팅마다 바뀌는 값은 제외해 오탐 0.</p>
+    </div>
+    <div class="card">
+      <h3>사건 타임라인</h3>
+      <p>탐지 흔적의 시각을 모아 공격 진행 순서를 재구성합니다. 1분여에 집중된 자동화 공격임이 드러났고, 다른 실습 VM에서는 사전에 수기로 확인한 공격 순서와 정확히 일치했습니다.</p>
+    </div>
+    <div class="card">
+      <h3>증거 아카이브</h3>
+      <p>탐지 근거 파일을 원본 그대로 보존합니다. 공격자가 지운 접근 로그를 웹서버가 아직 붙잡고 있어(<code>/proc</code>), 삭제된 원본을 그대로 복구했습니다.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>원리로 보는 도구 — 돋보인 세 장면</h2>
+
+  <div class="scene">
+    <h3>1. 날짜 위장을 꿰뚫다</h3>
+    <p>공격자가 웹쉘의 수정 시각을 2024년으로 돌렸지만, <strong>생성 시각(ctime)은 방금</strong>으로 남았습니다. <code>touch</code>는 수정 시각만 바꿀 뿐 ctime은 그 순간으로 찍히기 때문입니다. 타임라인이 둘을 나란히 보여 줘 "최근에 심고 날짜만 위장했다"가 드러납니다. 수정 시각만 봤다면 2년 전 파일로 묻혔을 공격입니다.</p>
+  </div>
+  <div class="scene">
+    <h3>2. 흔적을 지우는 손을 포착</h3>
+    <p>공격자가 명령 기록을 <code>/dev/null</code>로 지워 한 통제의 증거는 사라졌지만, <strong>그 삭제 행위 자체</strong>를 다른 통제(LOG-03)가 잡았습니다. 한 겹이 지워져도 다른 겹이 지우는 손을 봅니다.</p>
+  </div>
+  <div class="scene">
+    <h3>3. 포트가 아니라 본질로 판단</h3>
+    <p>리버스 셸이 외부가 아닌 루프백(127.0.0.1)으로 연결돼 "외부 연결" 탐지는 올바르게 조용했고, 대신 <strong>"셸의 입출력이 네트워크 소켓인가"</strong>라는 본질을 보는 통제(PRC-08)가 잡았습니다. 포트·IP가 아니라 행위로 판단하기에 루프백이어도 놓치지 않습니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2>도구가 스스로 밝히는 한계</h2>
+  <p class="sub">탐지만큼 중요한 것은 결과의 신뢰 범위를 정직하게 말하는 것입니다.</p>
+  <ul class="tight">
+    <li>타임라인: "시각은 조작 가능(touch·시계 변경) — 순서는 단서일 뿐 증거가 아니다"</li>
+    <li>기준선: "기준선이 이미 침해된 뒤 찍혔다면 비교는 소용없다"</li>
+    <li>읽지 못한 항목은 '정상'으로 세지 않고 '점검 불가'로 따로 밝힌다</li>
+    <li>리포트는 외부 자원 없는 단일 HTML + CSP로, 웹 로그·웹쉘 속 공격자 문자열이 리포트를 열 때 실행되지 않도록 전부 이스케이프</li>
+  </ul>
+  <p class="note">아래 리포트는 스냅샷으로 복원되는 <strong>실습용 VM</strong>을 진단한 결과이며, 실제 운영 데이터가 아닙니다. 비밀번호 해시 등 민감 정보는 도구가 자동으로 가립니다.</p>
+  <div class="cta">
+    <a class="primary" href="report.html">실제 진단 리포트 원본 보기 →</a>
+    <a href="https://github.com/nb02079-ai/lintrace" target="_blank" rel="noopener">소스 저장소 →</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>LinTrace 0.1.0 · Python 3.6+ · 읽기 전용 침해 흔적 진단 · 공개 실습 VM 2종 검증</p>
+    <p>이도형 · <a href="mailto:nb02079@gmail.com">nb02079@gmail.com</a> · <a href="https://github.com/nb02079-ai" target="_blank" rel="noopener">github.com/nb02079-ai</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
