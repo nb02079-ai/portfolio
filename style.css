@@ -4,6 +4,7 @@
    ========================================================= */
 
 :root {
+  color-scheme: light;
   --bg: #f3f3f3;
   --ink: #17171a;
   --muted: #76766f;
@@ -23,25 +24,11 @@
   --gutter: clamp(20px, 5vw, 64px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #111113;
-    --ink: #ececea;
-    --muted: #9a9a93;
-    --faint: #76766f;
-    --line: #2a2a2d;
-    --rule: #3a3a3f;
-    --accent: #7c88ff;
-    --panel: #050506;
-    --panel-ink: #f2f2ee;
-    --panel-muted: #85857c;
-    --panel-line: #26262b;
-  }
-}
+/* 원본 샘플과 동일하게 항상 밝은 배경으로 고정 (다크 모드에서도 전환하지 않음) */
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--bg); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
@@ -211,7 +198,6 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.02em;
 }
 .work-row p { margin: 0 0 20px; color: #3a3a38; font-size: 0.98rem; line-height: 1.65; }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .work-row p { color: #c3c3bd; } }
 .work-row p b { font-weight: 600; color: var(--ink); }
 .work-links { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 0.9rem; }
 .work-links a {
